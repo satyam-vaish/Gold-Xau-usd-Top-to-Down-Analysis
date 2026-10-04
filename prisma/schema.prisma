@@ -1,0 +1,324 @@
+// GOLD INTELLIGENCE AI — Database Schema
+// Runtime: SQLite (sandbox/dev). Production docker-compose provisions PostgreSQL;
+// the schema is written to be portable (no enums / no native Json — string-encoded).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  name         String?
+  passwordHash String?
+  role         String       @default("trader") // trader | admin
+  settings     UserSettings?
+  journal      JournalEntry[]
+  alerts       Alert[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model UserSettings {
+  id                   String  @id @default(cuid())
+  userId               String  @unique
+  user                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  defaultInstrument    String  @default("XAUUSD") // XAUUSD | GC1!
+  defaultTimeframe     String  @default("15m")
+  chartType            String  @default("candles") // candles | line | area | bars
+  timezone             String  @default("UTC")
+  minRiskReward        Float   @default(3.0)
+  requireMss           Boolean @default(false)
+  requireSweep         Boolean @default(false)
+  requireDisplacement  Boolean @default(false)
+  requireFvg           Boolean @default(false)
+  requireHtfAlignment  Boolean @default(true)
+  requireFundAlignment Boolean @default(false)
+  sessionFilter        String  @default("ALL") // ALL | ASIAN | LONDON | NEW_YORK
+  maxVolatilityGuard   Boolean @default(true)
+  riskPerTradePercent  Float   @default(1.0)
+  accountBalance       Float   @default(10000)
+  accountCurrency      String  @default("USD")
+  dailyLossLimit       Float   @default(3.0) // percent
+  overlayToggles       String  @default("{}") // JSON map of chart overlay toggles
+  theme                String  @default("mono")
+  updatedAt            DateTime @updatedAt
+}
+
+model Instrument {
+  id            String  @id @default(cuid())
+  symbol        String  @unique // XAUUSD | GC1!
+  name          String
+  kind          String // spot | future
+  providerSpot  String? // gold-api | twelvedata | ...
+  providerCandle String? // twelvedata | yahoo | ...
+  tickSize      Float   @default(0.01)
+  contractSize  Float   @default(100) // oz per lot / per contract
+  enabled       Boolean @default(true)
+}
+
+model Candle {
+  id         String   @id @default(cuid())
+  instrument String
+  timeframe  String
+  ts         DateTime // candle open time
+  open       Float
+  high       Float
+  low        Float
+  close      Float
+  volume     Float?
+  source     String   @default("demo")
+  createdAt  DateTime @default(now())
+  @@unique([instrument, timeframe, ts])
+  @@index([instrument, timeframe, ts])
+}
+
+model QuoteSnapshot {
+  id         String   @id @default(cuid())
+  instrument String
+  price      Float
+  bid        Float?
+  ask        Float?
+  dayHigh    Float?
+  dayLow     Float?
+  dayOpen    Float?
+  volume     Float?
+  status     String   @default("LIVE") // LIVE | DELAYED | DEMO
+  source     String
+  createdAt  DateTime @default(now())
+  @@index([instrument, createdAt])
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  externalId  String   @unique // provider id / url hash for dedupe
+  headline    String
+  source      String
+  url         String
+  summary     String?
+  publishedAt DateTime
+  category    String   @default("GOLD") // FED | FOMC | INFLATION | CPI | NFP | GEOPOLITICS | ...
+  importance  String   @default("MEDIUM") // HIGH | MEDIUM | LOW
+  sentiment   String   @default("NEUTRAL") // BULLISH_GOLD | BEARISH_GOLD | NEUTRAL
+  sentimentScore Float @default(0)
+  impact      String?  // AI potential impact explanation
+  aiSummary   String?  // AI explanation
+  status      String   @default("LIVE") // LIVE | DEMO
+  createdAt   DateTime @default(now())
+  @@index([publishedAt])
+}
+
+model EconomicEvent {
+  id          String   @id @default(cuid())
+  externalId  String   @unique
+  name        String
+  country     String   @default("US")
+  eventTime   DateTime
+  previous    String?
+  forecast    String?
+  actual      String?
+  impact      String   @default("MEDIUM") // HIGH | MEDIUM | LOW
+  kind        String   @default("MACRO") // CPI | PCE | NFP | FOMC | GDP | RETAIL | UNEMPLOYMENT | SPEECH
+  goldReaction String? // JSON historical reaction stats
+  status      String   @default("LIVE") // LIVE | DEMO | ESTIMATED
+  createdAt   DateTime @default(now())
+  @@index([eventTime])
+}
+
+model LiquidityLevel {
+  id         String   @id @default(cuid())
+  instrument String
+  kind       String // BSL | SSL | EQH | EQL | PDH | PDL | PWH | PWL | SESSION_HIGH | SESSION_LOW | INTERNAL | EXTERNAL
+  price      Float
+  label      String
+  side       String // buy | sell
+  timeframe  String
+  strength   Float    @default(0.5)
+  status     String   @default("OPEN") // OPEN | SWEPT | CONSUMED
+  sweptAt    DateTime?
+  detectedAt DateTime @default(now())
+  expiresAt  DateTime?
+  @@index([instrument, status])
+}
+
+model OrderFlowRecord {
+  id          String   @id @default(cuid())
+  instrument  String
+  timeframe   String
+  ts          DateTime
+  buyVolume   Float
+  sellVolume  Float
+  delta       Float
+  cvd         Float
+  dataBasis   String   @default("PROXY") // AGGRESSOR | PROXY
+  createdAt   DateTime @default(now())
+  @@index([instrument, timeframe, ts])
+}
+
+model DetectedSetup {
+  id           String   @id @default(cuid())
+  instrument   String
+  direction    String // LONG | SHORT
+  setupType    String // LIQUIDITY_SWEEP_FVG | ORDER_BLOCK_RETEST | QUASIMODO | OTE | BREAKOUT | MSS_FVG | SESSION
+  timeframe    String
+  session      String?
+  entryLow     Float
+  entryHigh    Float
+  entryConfirm String
+  stopLoss     Float
+  takeProfit1  Float
+  takeProfit2  Float
+  takeProfit3  Float
+  riskReward   Float
+  quality      Float // 0..100
+  confluences  String   @default("[]") // JSON array
+  invalidation Float
+  horizon      String   @default("INTRADAY")
+  biasSnapshot String   @default("{}") // JSON: fundamental/technical bias at detection
+  status       String   @default("ACTIVE") // ACTIVE | TRIGGERED | INVALIDATED | EXPIRED
+  saved        Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@index([instrument, createdAt])
+}
+
+model Prediction {
+  id          String   @id @default(cuid())
+  engine      String // FUNDAMENTAL | TECHNICAL
+  instrument  String
+  horizon     String // 15m | 1h | 4h | session | 1d | 5d
+  direction   String // BULLISH | BEARISH | NEUTRAL
+  probBull    Float
+  probBear    Float
+  probNeutral Float
+  confidence  Float
+  expectedLow Float?
+  expectedHigh Float?
+  targetTs    DateTime
+  features    String   @default("[]") // JSON evidence list
+  invalidation String?
+  regime      String?
+  status      String   @default("PENDING") // PENDING | RESOLVED | EXPIRED
+  createdAt   DateTime @default(now())
+  outcomes    PredictionOutcome[]
+  @@index([engine, instrument, horizon, createdAt])
+}
+
+model PredictionOutcome {
+  id           String   @id @default(cuid())
+  predictionId String   @unique
+  prediction   Prediction @relation(fields: [predictionId], references: [id], onDelete: Cascade)
+  realizedDir  String // BULLISH | BEARISH | NEUTRAL
+  realizedMove Float // percent move over horizon
+  mfe          Float?
+  mae          Float?
+  correct      Boolean
+  resolvedAt   DateTime @default(now())
+}
+
+model JournalEntry {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tradeDate    DateTime
+  instrument   String   @default("XAUUSD")
+  direction    String // LONG | SHORT
+  entry        Float
+  stopLoss     Float?
+  takeProfit   Float?
+  exit         Float?
+  risk         Float?
+  reward       Float?
+  rr           Float?
+  size         Float?
+  session      String?
+  timeframe    String?
+  setupType    String?
+  fundBias     String?
+  techBias     String?
+  liquidityNote String?
+  confirmations String  @default("[]") // JSON
+  outcome      String   @default("OPEN") // WIN | LOSS | BE | OPEN
+  pnl          Float?
+  notes        String?
+  screenshotUrl String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@index([userId, tradeDate])
+}
+
+model BacktestResult {
+  id          String   @id @default(cuid())
+  name        String
+  instrument  String
+  timeframe   String
+  strategy    String
+  sessionFilter String @default("ALL")
+  dateFrom    DateTime
+  dateTo      DateTime
+  params      String   @default("{}") // JSON
+  totalTrades Int
+  winRate     Float
+  profitFactor Float
+  netReturn   Float
+  maxDrawdown Float
+  avgRR       Float
+  expectancy  Float
+  sharpe      Float
+  equityCurve String   @default("[]") // JSON [{ts, equity}]
+  trades      String   @default("[]") // JSON
+  assumptions String   @default("{}") // JSON spread/commission/slippage
+  walkForward String? // JSON wfa results
+  createdAt   DateTime @default(now())
+  @@index([instrument, strategy])
+}
+
+model Alert {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind        String // PRICE_LEVEL | BSL_SWEEP | SSL_SWEEP | BULLISH_MSS | BEARISH_MSS | FVG_FORMED | OB_RETEST | QM_FORMED | BUY_PRESSURE | SELL_PRESSURE | CVD_DIVERGENCE | VOL_EXPANSION | NEWS_APPROACH | ALIGNMENT | SETUP_GENERATED
+  instrument  String   @default("XAUUSD")
+  params      String   @default("{}") // JSON {price, thresholdPct, ...}
+  channels    String   @default("[\"in_app\"]") // JSON: in_app | browser | email | telegram
+  active      Boolean  @default(true)
+  lastFiredAt DateTime?
+  createdAt   DateTime @default(now())
+  events      AlertEvent[]
+}
+
+model AlertEvent {
+  id        String   @id @default(cuid())
+  alertId   String
+  alert     Alert    @relation(fields: [alertId], references: [id], onDelete: Cascade)
+  message   String
+  payload   String   @default("{}") // JSON snapshot
+  createdAt DateTime @default(now())
+  @@index([alertId, createdAt])
+}
+
+model ModelVersion {
+  id         String   @id @default(cuid())
+  engine     String // FUNDAMENTAL | TECHNICAL
+  name       String
+  version    String
+  params     String   @default("{}")
+  trainedAt  DateTime @default(now())
+  notes      String?
+}
+
+model ModelMetric {
+  id         String   @id @default(cuid())
+  engine     String // FUNDAMENTAL | TECHNICAL
+  horizon    String
+  window     String   @default("90d")
+  metrics    String   @default("{}") // JSON: accuracy, precision, recall, f1, brier, logLoss, confusion, calibration
+  regime     String?  // optional per-regime split
+  computedAt DateTime @default(now())
+  @@index([engine, horizon])
+}
