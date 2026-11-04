@@ -1,0 +1,1769 @@
+# MASTER PROJECT PROMPT
+# GOLD INTELLIGENCE AI — Institutional Gold Market Intelligence & Prediction Platform
+
+## 1. YOUR ROLE
+
+Act as a team of senior professionals consisting of:
+
+- Senior Full-Stack Software Architect.
+- Quantitative Researcher.
+- AI/ML Engineer.
+- Financial Data Engineer.
+- Algorithmic Trading Developer.
+- ICT/SMC Market Structure Specialist.
+- Financial Data Scientist.
+- Professional UI/UX Designer.
+
+Your task is to design and develop a complete, production-quality, AI-powered financial market intelligence platform focused specifically on Gold (XAUUSD and COMEX Gold Futures GC1!).
+
+This must be a fully functional application, not merely a frontend prototype.
+
+The application should combine the capabilities of TradingView, Bloomberg Terminal, institutional order-flow platforms, and modern AI-based quantitative research systems.
+
+Project name: GOLD INTELLIGENCE AI.
+
+Tagline: Understand the Market. Decode Liquidity. Predict with Intelligence.
+
+Primary objective:
+
+Build a platform that monitors the Gold market in real time, understands fundamental and technical market conditions, identifies liquidity, detects ICT/SMC setups, predicts potential price movements, generates explainable trading setups, and evaluates its own historical prediction performance.
+
+The application is primarily designed for intraday Gold traders.
+
+---
+
+# 2. TECHNOLOGY STACK
+
+Use the following architecture.
+
+### Frontend
+- Next.js.
+- React.
+- TypeScript.
+- Tailwind CSS.
+- Framer Motion.
+- TradingView Lightweight Charts.
+- Recharts.
+- Lucide Icons.
+- WebSocket client.
+
+### Backend
+- Python.
+- FastAPI.
+- REST APIs.
+- WebSockets.
+- PostgreSQL.
+- Redis.
+- Celery or an equivalent background processing system.
+
+### AI/ML
+- Python.
+- Pandas.
+- NumPy.
+- Scikit-learn.
+- XGBoost.
+- PyTorch.
+- NLP.
+- Financial sentiment analysis.
+- Time-series forecasting.
+- Statistical modelling.
+
+### Deployment
+- Docker.
+- Docker Compose.
+- Vercel or equivalent frontend hosting.
+- Cloud hosting for backend.
+- Managed PostgreSQL.
+- Secure environment-variable configuration.
+
+Use modular architecture, clean code, reusable components, and separation of concerns.
+
+---
+
+# 3. UI/UX — MONOCHROMATIC TRANSPARENT GLASSMORPHISM
+
+This is one of the most important requirements.
+
+Create a futuristic, premium, transparent, monochromatic trading terminal.
+
+The entire interface must follow a black, white, silver and graphite colour scheme.
+
+### Colour system
+
+- Background: #050505.
+- Secondary background: #0B0B0B.
+- Panel background: rgba(255,255,255,0.035).
+- Primary text: #FFFFFF.
+- Secondary text: #A1A1AA.
+- Muted text: #71717A.
+- Glass borders: rgba(255,255,255,0.12).
+- Silver highlight: #D4D4D8.
+- White glow: rgba(255,255,255,0.20).
+
+Do not use blue or red as the primary UI theme.
+
+### Glassmorphism
+
+All major dashboard panels should feature:
+
+- Transparent backgrounds.
+- backdrop-filter blur(18px–24px).
+- Subtle glass borders.
+- Layered shadows.
+- Soft silver highlights.
+- Rounded corners.
+- Smooth hover effects.
+- Depth and visual hierarchy.
+
+### Background
+
+Create an elegant animated monochromatic background:
+
+- Deep black gradient.
+- Slowly moving translucent silver light orbs.
+- Subtle floating particles.
+- Animated glass reflections.
+- Faint grid patterns.
+- Very subtle noise texture.
+
+Avoid excessive animation.
+
+### Animations
+
+Use Framer Motion for:
+
+- Smooth page transitions.
+- Sidebar animations.
+- Animated dashboard cards.
+- Number counter animations.
+- Live market pulse.
+- Hover lift effects.
+- Chart panel transitions.
+- Loading skeletons.
+- Animated progress indicators.
+- Smooth modals and dropdowns.
+
+Respect reduced-motion accessibility settings.
+
+### Layout
+
+Desktop layout:
+
+- Left collapsible sidebar.
+- Top market information bar.
+- Main content workspace.
+- Right AI intelligence panel.
+- Bottom market information section.
+
+Mobile layout:
+
+- Responsive navigation.
+- Collapsible analytical panels.
+- Full-width interactive chart.
+- Compact cards.
+- Swipeable analytical sections.
+
+The final design must look like an expensive institutional trading terminal, not a generic admin dashboard.
+
+---
+
+# 4. GLOBAL MARKET DASHBOARD
+
+Create an overview dashboard.
+
+### Top market ticker
+
+Display:
+
+- XAUUSD current price.
+- GC1! current price.
+- Daily change.
+- Daily percentage change.
+- Bid/Ask if available.
+- Spread if available.
+- Market session.
+- Market status.
+- Last data update.
+- Data provider.
+
+### Market overview cards
+
+Display:
+
+1. Gold Spot Price.
+2. COMEX Gold Futures.
+3. DXY.
+4. US 10-Year Treasury Yield.
+5. US 2-Year Treasury Yield.
+6. Silver.
+7. Gold Volatility.
+8. Market Sentiment.
+
+### Market intelligence summary
+
+Show:
+
+- Current market bias.
+- Fundamental bias.
+- Technical bias.
+- Overall confluence.
+- Market regime.
+- Nearest liquidity target.
+- Next high-impact news.
+- Volatility condition.
+
+### Important instrument distinction
+
+XAUUSD and GC1! must be treated as separate instruments.
+
+Never merge spot Gold and futures prices or volumes.
+
+Provide an instrument selector that lets users switch between them.
+
+---
+
+# 5. ADVANCED LIVE CHARTING ENGINE
+
+Use TradingView Lightweight Charts for the main charting interface.
+
+Support:
+
+### Chart types
+
+- Candlestick.
+- Line.
+- Area.
+- Bar chart.
+
+### Timeframes
+
+- 1 Minute.
+- 3 Minutes.
+- 5 Minutes.
+- 15 Minutes.
+- 30 Minutes.
+- 1 Hour.
+- 2 Hours.
+- 4 Hours.
+- Daily.
+- Weekly.
+- Monthly.
+
+### Chart functionality
+
+- Real-time price updates.
+- Historical candles.
+- Crosshair.
+- Zoom.
+- Scroll.
+- Price scale.
+- Time scale.
+- Fullscreen.
+- Volume bars.
+- OHLC information.
+- Session separators.
+- Custom indicators.
+- Chart annotations.
+- Drawing tools where feasible.
+- Multiple chart layouts.
+- Multi-chart comparison.
+
+### Chart overlays
+
+Display:
+
+- FVG.
+- Order Blocks.
+- Breaker Blocks.
+- Liquidity zones.
+- Support and resistance.
+- PDH/PDL.
+- PWH/PWL.
+- Session highs/lows.
+- Fibonacci.
+- VWAP.
+- Volume Profile.
+- Premium and Discount zones.
+
+Allow each overlay to be independently enabled or disabled.
+
+---
+
+# 6. FUNDAMENTAL INTELLIGENCE MODULE
+
+Create a complete section named FUNDAMENTAL INTELLIGENCE.
+
+## A. Live Financial News
+
+Integrate reliable financial news providers.
+
+Categories:
+
+- Federal Reserve.
+- FOMC.
+- Inflation.
+- CPI.
+- PCE.
+- NFP.
+- Unemployment.
+- Interest rates.
+- US Dollar.
+- Treasury yields.
+- Geopolitical events.
+- Central bank purchases.
+- Global economic conditions.
+- Gold demand.
+
+Every news article must show:
+
+- Headline.
+- Source.
+- Published time.
+- Summary.
+- Importance.
+- Gold sentiment.
+- Potential impact.
+- AI explanation.
+
+Sentiment classification:
+
+- Bullish Gold.
+- Bearish Gold.
+- Neutral.
+
+Prevent duplicate articles and display source attribution.
+
+## B. Economic Calendar
+
+Include:
+
+- Event name.
+- Country.
+- Release time.
+- Previous value.
+- Forecast.
+- Actual.
+- Impact level.
+- Countdown.
+- Historical reaction.
+
+Highlight high-impact events.
+
+Include CPI, PCE, NFP, FOMC, Fed speeches, unemployment, GDP, retail sales and major inflation releases.
+
+## C. Macro Dashboard
+
+Track:
+
+- DXY.
+- US 10Y yield.
+- US 2Y yield.
+- Real Treasury yields.
+- Fed rate expectations.
+- Inflation expectations.
+- Gold/Silver ratio.
+- Global gold demand.
+- Central bank gold purchases.
+
+Show correlation charts and historical relationships with Gold.
+
+## D. Fundamental AI Prediction
+
+Build a dedicated fundamental prediction engine.
+
+Analyse:
+
+- Economic news.
+- Macroeconomic data.
+- Interest-rate expectations.
+- Dollar strength.
+- Treasury yields.
+- Geopolitical risk.
+- Inflation.
+- Central bank activity.
+- Historical Gold reactions.
+
+Output:
+
+- Fundamental bias.
+- Bullish probability.
+- Bearish probability.
+- Confidence.
+- Short-term outlook.
+- Medium-term outlook.
+- Supporting factors.
+- Conflicting factors.
+- Key risks.
+- Events that could invalidate the outlook.
+
+Prediction horizons:
+
+- 1 Hour.
+- 4 Hours.
+- Next Trading Session.
+- 1 Day.
+- 5 Days.
+
+Every prediction must explain its reasoning.
+
+---
+
+# 7. TECHNICAL INTELLIGENCE MODULE
+
+Create a dedicated TECHNICAL INTELLIGENCE workspace.
+
+## A. Multi-Timeframe Analysis
+
+Analyse:
+
+- 1M.
+- 5M.
+- 15M.
+- 1H.
+- 4H.
+- 1D.
+
+For every timeframe identify:
+
+- Market structure.
+- Trend.
+- BOS.
+- CHoCH.
+- MSS.
+- HH.
+- HL.
+- LH.
+- LL.
+- Support.
+- Resistance.
+- Premium.
+- Discount.
+- Equilibrium.
+
+Display the results in a multi-timeframe confluence matrix.
+
+## B. ICT/SMC Automatic Scanner
+
+Implement algorithms for detecting:
+
+1. Fair Value Gaps.
+2. Inverse Fair Value Gaps.
+3. Order Blocks.
+4. Breaker Blocks.
+5. Mitigation Blocks.
+6. Rejection Blocks.
+7. Break of Structure.
+8. Change of Character.
+9. Market Structure Shift.
+10. Displacement.
+11. Liquidity Sweeps.
+12. Equal Highs.
+13. Equal Lows.
+14. Internal Liquidity.
+15. External Liquidity.
+16. Premium and Discount.
+17. Optimal Trade Entry.
+18. Previous Day High/Low.
+19. Previous Week High/Low.
+20. Session Highs/Lows.
+
+Create automatic chart annotations.
+
+Provide configurable sensitivity and confirmation rules.
+
+Avoid identifying every minor candle movement as a structure break.
+
+## C. Quasimodo Analyzer
+
+Add an automatic Quasimodo pattern scanner.
+
+Detect:
+
+- Bullish QM.
+- Bearish QM.
+- Left shoulder.
+- Head.
+- Right shoulder.
+- QM neckline.
+- Breakout confirmation.
+- Entry zone.
+- Invalidation.
+- Target levels.
+
+Combine with Fibonacci retracement and market structure.
+
+## D. Fibonacci Intelligence
+
+Automatically calculate:
+
+- 0.
+- 0.236.
+- 0.382.
+- 0.5.
+- 0.618.
+- 0.705.
+- 0.786.
+- 0.886.
+- 1.
+- Extension levels.
+
+Allow Fibonacci to be drawn from:
+
+- Swing high to swing low.
+- Swing low to swing high.
+- The impulse leg causing BOS.
+- The impulse leg causing MSS.
+- Manual user selection.
+
+Include OTE zone detection.
+
+## E. Standard Deviation Analyzer
+
+Include:
+
+- Standard deviation levels.
+- Price deviation from selected reference.
+- Session-based deviation.
+- Daily range deviation.
+- Volatility-adjusted deviation.
+- Historical deviation analysis.
+
+Allow different calculation methods and reference anchors.
+
+## F. VWAP & Volume Profile
+
+Include:
+
+- Session VWAP.
+- Daily VWAP.
+- Weekly VWAP.
+- Anchored VWAP.
+- Volume Profile.
+- POC.
+- VAH.
+- VAL.
+- High Volume Nodes.
+- Low Volume Nodes.
+
+Show price reaction around these levels.
+
+---
+
+# 8. ADVANCED LIQUIDITY INTELLIGENCE
+
+Build a dedicated liquidity analysis engine.
+
+### Liquidity detection
+
+Identify:
+
+- Buy-side Liquidity.
+- Sell-side Liquidity.
+- Equal Highs.
+- Equal Lows.
+- Previous Day High.
+- Previous Day Low.
+- Previous Week High.
+- Previous Week Low.
+- Asian High/Low.
+- London High/Low.
+- New York High/Low.
+- Internal Liquidity.
+- External Liquidity.
+- Liquidity Sweeps.
+- Liquidity Reclaims.
+- Potential Liquidity Targets.
+
+### Liquidity Prediction Engine
+
+Estimate:
+
+- Nearest BSL.
+- Nearest SSL.
+- Likely liquidity target.
+- Potential sweep zone.
+- Liquidity already consumed.
+- Distance to liquidity.
+- Potential reversal zone.
+- Liquidity target confidence.
+
+Use historical market behaviour and market structure.
+
+Never claim to know hidden stop-loss orders.
+
+Clearly distinguish inferred liquidity from observable exchange order-book depth.
+
+---
+
+# 9. REAL-TIME MULTI-TIMEFRAME LIQUIDITY HEATMAP
+
+Create an advanced interactive heatmap.
+
+Timeframes:
+
+- 1M.
+- 5M.
+- 15M.
+- 1H.
+- 4H.
+- 1D.
+
+Visualize:
+
+- Order-book depth.
+- Bid concentration.
+- Ask concentration.
+- Executed volume concentration.
+- High-volume price levels.
+- Potential liquidity zones.
+- Liquidity clusters.
+- Price movement through liquidity.
+
+Add:
+
+- Heatmap zoom.
+- Timeframe selector.
+- Price-level filtering.
+- Historical heatmap replay.
+- Data source indicator.
+- Live updates.
+
+Clearly differentiate:
+
+1. Actual resting order-book liquidity.
+2. Executed volume.
+3. Inferred liquidity from price action.
+
+If actual order-book data is unavailable, show an appropriately labelled inferred liquidity heatmap rather than fabricating depth data.
+
+---
+
+# 10. BUYER VS SELLER PRESSURE ENGINE
+
+Build a live order-flow dashboard.
+
+Display:
+
+- Buyer Pressure.
+- Seller Pressure.
+- Buy Volume.
+- Sell Volume.
+- Volume Delta.
+- Cumulative Volume Delta.
+- Aggressive Buying.
+- Aggressive Selling.
+- Volume Imbalance.
+- Absorption.
+- Stacked Imbalances.
+
+Include:
+
+- Percentage comparison.
+- Historical pressure chart.
+- Multi-timeframe pressure.
+- Price vs CVD divergence.
+- Buyer/Seller pressure alerts.
+
+Use exchange trade aggressor information when available.
+
+If actual aggressor data is unavailable, calculate a clearly labelled proxy using OHLCV data.
+
+Do not describe estimated candle-based buying pressure as actual buyer/seller participation.
+
+---
+
+# 11. ORDER FLOW & FOOTPRINT ANALYSIS
+
+Create an institutional order-flow workspace.
+
+Include:
+
+- Footprint Charts.
+- Bid x Ask volume.
+- Delta.
+- CVD.
+- Volume Imbalance.
+- Stacked Imbalance.
+- Absorption.
+- Exhaustion.
+- POC.
+- Volume Clusters.
+- Market Profile.
+- Volume Profile.
+- Session Delta.
+
+Allow users to switch between timeframes.
+
+Show actual data availability and instrument-specific limitations.
+
+---
+
+# 12. GOLD SESSION INTELLIGENCE
+
+Create a session analyzer.
+
+Track:
+
+- Asian Session.
+- London Session.
+- New York Session.
+- London Killzone.
+- New York Killzone.
+- Midnight Opening.
+- Daily Opening.
+- Weekly Opening.
+- Session High/Low.
+- Opening Range.
+- Session Range.
+
+Use timezone-aware session calculations.
+
+Allow the user to configure their chart timezone.
+
+Automatically identify:
+
+- Asian range breakout.
+- London liquidity sweep.
+- NY reversal.
+- Session displacement.
+- Session expansion.
+- Session continuation.
+
+Provide historical session statistics.
+
+---
+
+# 13. VOLATILITY INTELLIGENCE
+
+Build a volatility research module.
+
+Include:
+
+- ATR.
+- ADR.
+- Average Weekly Range.
+- Daily Range.
+- Range Consumed Percentage.
+- Historical Volatility.
+- Implied Volatility where available.
+- Volatility Expansion.
+- Volatility Contraction.
+- Standard Deviation.
+- Session Volatility.
+- News-Driven Volatility.
+
+Calculate volatility across multiple timeframes.
+
+Display:
+
+- Current daily range.
+- Average daily range.
+- Remaining estimated range.
+- Volatility regime.
+- Historical volatility percentile.
+
+---
+
+# 14. AI MARKET REGIME DETECTOR
+
+Classify current market behaviour into:
+
+- Trending Bullish.
+- Trending Bearish.
+- Ranging.
+- High Volatility.
+- Low Volatility.
+- Consolidation.
+- Potential Reversal.
+- Breakout.
+- Manipulation Candidate.
+
+Use statistical and machine-learning methods.
+
+Display:
+
+- Current regime.
+- Probability.
+- Supporting evidence.
+- Historical examples.
+- Regime transition warnings.
+
+Do not assume a stop hunt or manipulation merely from a wick.
+
+---
+
+# 15. HISTORICAL PATTERN RECOGNITION ENGINE
+
+Build a machine-learning engine that compares current market conditions with historical XAUUSD data.
+
+Features:
+
+- Similar candlestick structures.
+- Similar market structures.
+- Similar liquidity conditions.
+- Similar volatility regimes.
+- Similar session behaviour.
+- Similar fundamental environments.
+- Similar volume profiles.
+
+Output:
+
+- Number of comparable historical situations.
+- Historical bullish outcomes.
+- Historical bearish outcomes.
+- Average movement.
+- Maximum favourable excursion.
+- Maximum adverse excursion.
+- Time taken to reach target.
+- Statistical confidence intervals.
+
+Provide visual comparisons of current and historical setups.
+
+Prevent data leakage and avoid training/test contamination.
+
+---
+
+# 16. AI PREDICTION CENTER
+
+Create two independent prediction engines.
+
+## A. Fundamental Prediction Engine
+
+Use:
+
+- News.
+- Macroeconomic indicators.
+- Economic calendar.
+- Dollar index.
+- Treasury yields.
+- Inflation.
+- Geopolitical developments.
+
+## B. Technical Prediction Engine
+
+Use:
+
+- Market structure.
+- Liquidity.
+- FVG.
+- Order Blocks.
+- BOS/MSS.
+- Volume.
+- CVD.
+- Buying/Selling Pressure.
+- Volatility.
+- Market regime.
+- Session behaviour.
+
+Prediction horizons:
+
+- 15 Minutes.
+- 1 Hour.
+- 4 Hours.
+- Next Session.
+- 1 Day.
+- 5 Days.
+
+For each prediction show:
+
+- Bullish probability.
+- Bearish probability.
+- Neutral probability.
+- Confidence score.
+- Predicted direction.
+- Expected price zone.
+- Supporting evidence.
+- Invalidation conditions.
+- Prediction timestamp.
+
+Probabilities must come from actual trained/calibrated models or clearly labelled heuristic calculations.
+
+Never invent AI accuracy or prediction confidence.
+
+---
+
+# 17. GOLD AI CONFLUENCE ENGINE
+
+Build a master intelligence engine that combines fundamental and technical analysis.
+
+Inputs:
+
+- Fundamental Bias.
+- Technical Bias.
+- Multi-timeframe Structure.
+- Liquidity Conditions.
+- Order Flow.
+- Buyer/Seller Pressure.
+- Volatility.
+- News Sentiment.
+- Market Regime.
+- Session Behaviour.
+
+Output:
+
+- Overall Market Bias.
+- Bullish Probability.
+- Bearish Probability.
+- Neutral Probability.
+- Confluence Score.
+- Confidence.
+- Key Liquidity Target.
+- Major Support.
+- Major Resistance.
+- Potential Reversal Zone.
+- Key Risks.
+- Invalidation Conditions.
+
+Explain all supporting and conflicting evidence.
+
+Never force a bullish or bearish conclusion when the evidence is inconclusive.
+
+---
+
+# 18. AI TRADE SETUP GENERATOR
+
+Build an advanced trade setup generation module.
+
+Generate potential:
+
+- Buy setups.
+- Sell setups.
+- Breakout setups.
+- Reversal setups.
+- Liquidity sweep setups.
+- FVG retracement setups.
+- Order Block setups.
+- Quasimodo setups.
+- Session-based setups.
+
+Each setup should include:
+
+- Instrument.
+- Trade direction.
+- Entry zone.
+- Entry confirmation.
+- Stop Loss.
+- Take Profit 1.
+- Take Profit 2.
+- Take Profit 3.
+- Risk-to-Reward.
+- Setup quality score.
+- Supporting confluences.
+- Invalidation level.
+- Market session.
+- Prediction horizon.
+
+Allow configurable rules:
+
+- Minimum RR 1:3.
+- Require MSS.
+- Require liquidity sweep.
+- Require displacement.
+- Require FVG.
+- Require higher-timeframe alignment.
+- Require fundamental alignment.
+- Session restrictions.
+- Maximum volatility restrictions.
+
+Do not force a trade setup when the conditions are not satisfied.
+
+Show NO VALID SETUP when appropriate.
+
+Never execute trades automatically.
+
+---
+
+# 19. AI NEWS IMPACT PREDICTOR
+
+Build a dedicated news reaction intelligence engine.
+
+For each major event:
+
+- Identify the event.
+- Retrieve historical comparable events.
+- Analyse forecast versus actual.
+- Analyse immediate Gold movement.
+- Analyse 15-minute reaction.
+- Analyse 1-hour reaction.
+- Analyse 4-hour reaction.
+- Analyse DXY reaction.
+- Analyse Treasury yield reaction.
+
+Display:
+
+- Historical average Gold reaction.
+- Historical volatility.
+- Typical directional reaction.
+- Current market positioning context where available.
+- Uncertainty.
+- Possible scenarios.
+
+Provide an event countdown.
+
+---
+
+# 20. GOLD INTERMARKET ANALYSIS
+
+Create a cross-market intelligence dashboard.
+
+Monitor:
+
+- Gold vs DXY.
+- Gold vs US 10Y yields.
+- Gold vs US 2Y yields.
+- Gold vs Silver.
+- Gold vs S&P 500.
+- Gold vs VIX.
+- Gold vs USD/INR.
+- Gold vs crude oil.
+
+Include:
+
+- Correlation matrix.
+- Rolling correlation.
+- Relative strength.
+- Divergence detection.
+- Historical comparison.
+
+Do not assume correlations are permanently stable or causal.
+
+---
+
+# 21. COMEX FUTURES INTELLIGENCE
+
+Build a separate GC Futures module.
+
+Include:
+
+- Futures price.
+- Contract volume.
+- Open Interest.
+- Contract expiry.
+- Futures curve.
+- Contract rollover.
+- Volume changes.
+- Open interest changes.
+- Futures basis relative to spot.
+- Session statistics.
+
+Include CFTC Commitment of Traders analysis:
+
+- Commercial positions.
+- Non-commercial positions.
+- Net positioning.
+- Weekly positioning changes.
+- Historical positioning percentiles.
+
+Include Gold options analytics where licensed data is available:
+
+- Implied volatility.
+- Put/Call information.
+- Options volume.
+- Open interest.
+- Expiration concentrations.
+- Skew.
+
+Clearly indicate delayed or unavailable data.
+
+---
+
+# 22. AI TRADING ASSISTANT
+
+Create an integrated conversational AI assistant.
+
+The assistant should have access to:
+
+- Current Gold prices.
+- Live chart information.
+- Technical indicators.
+- ICT/SMC analysis.
+- Liquidity data.
+- Order flow.
+- Fundamental news.
+- Economic calendar.
+- AI predictions.
+- Historical patterns.
+- Trade setups.
+
+Users should be able to ask:
+
+- What is the current XAUUSD bias?
+- What is the 4H market structure?
+- Where is the nearest liquidity?
+- Has a bullish MSS formed?
+- Is there a valid FVG?
+- What is the current buyer/seller ratio?
+- Is Gold approaching a major news event?
+- What is the strongest confluence?
+- Why is Gold moving?
+- What could invalidate the current bias?
+- Show me potential 1:3 setups.
+- Compare the current market with historical patterns.
+
+The AI must answer using retrieved live and historical data.
+
+Show the data timestamp and sources.
+
+It must never pretend to see a chart or data that it cannot access.
+
+---
+
+# 23. AI TRADE JOURNAL
+
+Create a comprehensive trading journal.
+
+Allow manual and AI-generated trade entries.
+
+Record:
+
+- Date.
+- Instrument.
+- Direction.
+- Entry.
+- Stop Loss.
+- Take Profit.
+- Actual exit.
+- Risk.
+- Reward.
+- RR.
+- Trading session.
+- Timeframe.
+- Setup type.
+- Fundamental bias.
+- Technical bias.
+- Liquidity conditions.
+- ICT/SMC confirmations.
+- Trade outcome.
+- Screenshots.
+- Personal notes.
+
+Generate:
+
+- Win Rate.
+- Loss Rate.
+- Profit Factor.
+- Average RR.
+- Expectancy.
+- Maximum Drawdown.
+- Average Winner.
+- Average Loser.
+- Session Performance.
+- Setup Performance.
+- Monthly Performance.
+- Weekly Performance.
+
+Add equity curve and performance charts.
+
+---
+
+# 24. AI TRADING PERFORMANCE ANALYZER
+
+Analyse historical trades to discover:
+
+- Best performing session.
+- Best performing timeframe.
+- Best performing setup.
+- Most profitable market regime.
+- Performance with fundamental alignment.
+- Performance with technical alignment.
+- Performance of liquidity sweep setups.
+- Performance of FVG setups.
+- Common reasons for losing trades.
+
+Generate actionable reports.
+
+Never claim that the AI learns from journal data unless an actual training or model-update process has been implemented.
+
+---
+
+# 25. STRATEGY BACKTESTING ENGINE
+
+Build a backtesting system.
+
+Allow users to select:
+
+- Historical date range.
+- Instrument.
+- Timeframe.
+- Trading session.
+- Strategy.
+- Entry rules.
+- Exit rules.
+- Stop Loss.
+- Take Profit.
+- Minimum RR.
+- Risk per trade.
+
+Strategies to test:
+
+- ICT Liquidity Sweep.
+- MSS + FVG.
+- Order Block Retest.
+- Quasimodo + Fibonacci.
+- London Killzone.
+- New York Killzone.
+- VWAP Reversion.
+- Volume Profile Strategy.
+- Custom strategy combinations.
+
+Display:
+
+- Total trades.
+- Win rate.
+- Profit factor.
+- Net return.
+- Maximum drawdown.
+- Average RR.
+- Expectancy.
+- Sharpe ratio.
+- Equity curve.
+- Trade distribution.
+
+Include realistic spread, commissions, slippage and execution assumptions.
+
+Prevent look-ahead bias and survivorship bias.
+
+Support walk-forward validation.
+
+---
+
+# 26. MARKET REPLAY ENGINE
+
+Allow users to replay historical Gold price action.
+
+Features:
+
+- Historical candle replay.
+- Speed controls.
+- Pause and resume.
+- Step-by-step candles.
+- Timeframe switching.
+- Indicator overlays.
+- Liquidity visualization.
+- ICT/SMC annotations.
+- Order-flow replay when historical data exists.
+
+Add a mode that hides future candles so users can test strategies without hindsight.
+
+---
+
+# 27. SMART ALERT SYSTEM
+
+Allow users to create custom alerts.
+
+Alert conditions:
+
+- Price reaches a liquidity level.
+- BSL sweep.
+- SSL sweep.
+- Bullish MSS.
+- Bearish MSS.
+- FVG formation.
+- Order Block retest.
+- Quasimodo formation.
+- Buyer pressure threshold.
+- Seller pressure threshold.
+- CVD divergence.
+- Volatility expansion.
+- Major news approaching.
+- Fundamental/technical alignment.
+- AI trade setup generated.
+
+Notification options:
+
+- In-app.
+- Browser notification.
+- Email.
+- Telegram integration, if configured.
+
+Allow users to customize notification preferences.
+
+---
+
+# 28. POSITION SIZE & RISK MANAGEMENT
+
+Create a complete trading calculator.
+
+Include:
+
+- Account balance.
+- Account currency.
+- Risk percentage.
+- Risk amount.
+- Entry price.
+- Stop-loss price.
+- Take-profit price.
+- Contract size.
+- Tick size.
+- Pip value.
+- Position size.
+- Potential profit.
+- Potential loss.
+- RR.
+
+Support Gold contract specifications from the selected broker or instrument provider.
+
+Add:
+
+- Daily loss limit tracker.
+- Weekly loss tracker.
+- Drawdown calculator.
+- Risk exposure monitor.
+- Trading statistics.
+
+---
+
+# 29. PREDICTION MODEL PERFORMANCE
+
+Create a dedicated AI model evaluation dashboard.
+
+Measure fundamental and technical models separately.
+
+Metrics:
+
+- Directional Accuracy.
+- Precision.
+- Recall.
+- F1 Score.
+- Brier Score.
+- Log Loss.
+- Confusion Matrix.
+- Calibration Curve.
+- Prediction Error.
+- Model Drift.
+- Performance by timeframe.
+- Performance by market regime.
+
+Compare against simple baselines.
+
+Track historical predictions against actual outcomes.
+
+Never present training accuracy as real-world prediction accuracy.
+
+Use out-of-sample and walk-forward testing.
+
+---
+
+# 30. COMPLETE WEBSITE NAVIGATION
+
+Create these main sections in the left sidebar:
+
+1. Overview Dashboard.
+2. Live Gold Charts.
+3. Fundamental Intelligence.
+4. Technical Intelligence.
+5. ICT/SMC Scanner.
+6. Liquidity Intelligence.
+7. Liquidity Heatmap.
+8. Order Flow Analysis.
+9. Session Intelligence.
+10. Volatility Intelligence.
+11. Intermarket Analysis.
+12. COMEX Futures Intelligence.
+13. AI Prediction Center.
+14. AI Confluence Engine.
+15. Trade Setup Generator.
+16. AI Trading Assistant.
+17. Trade Journal.
+18. Strategy Backtester.
+19. Market Replay.
+20. Smart Alerts.
+21. Risk Management.
+22. Model Performance.
+23. Settings.
+
+Use a searchable sidebar and collapsible submenus.
+
+---
+
+# 31. DATA SOURCES & API INTEGRATION
+
+Build a provider-independent data architecture.
+
+Investigate appropriate providers such as:
+
+### Market data
+- Twelve Data.
+- Polygon/Massive.
+- Databento.
+- CME Group market data.
+- Broker APIs.
+- Other licensed XAUUSD data providers.
+
+### News
+- Finnhub.
+- Financial Modeling Prep.
+- NewsAPI.
+- Licensed financial news providers.
+
+### Economic data
+- Federal Reserve FRED.
+- US Bureau of Labor Statistics.
+- US Bureau of Economic Analysis.
+- Official Federal Reserve releases.
+- CFTC.
+- Other official economic sources.
+
+### Charting
+- TradingView Lightweight Charts.
+- TradingView widgets only where their permitted use and functionality fit the application.
+
+Do not scrape unauthorized TradingView data.
+
+Implement:
+
+- Provider adapters.
+- API key management.
+- Data normalization.
+- Historical data storage.
+- WebSocket streams.
+- Retry logic.
+- Rate-limit handling.
+- Caching.
+- Data validation.
+- Provider health monitoring.
+
+All data must include:
+
+- Source.
+- Timestamp.
+- Instrument.
+- Timeframe.
+- Live/delayed status.
+
+Never fabricate real-time prices, volumes, order-book depth, news or predictions.
+
+If an API is unavailable, clearly show a data-unavailable or demo-data status.
+
+Never expose secret keys in frontend code.
+
+---
+
+# 32. BACKEND MODULE ARCHITECTURE
+
+Create independent services:
+
+1. Market Data Service.
+2. Historical Data Service.
+3. News Aggregation Service.
+4. Economic Calendar Service.
+5. Macro Intelligence Service.
+6. Technical Analysis Engine.
+7. ICT/SMC Detection Engine.
+8. Liquidity Detection Engine.
+9. Liquidity Heatmap Engine.
+10. Order Flow Engine.
+11. Volume Profile Engine.
+12. Session Analysis Engine.
+13. Volatility Engine.
+14. Market Regime Engine.
+15. Fundamental Prediction Engine.
+16. Technical Prediction Engine.
+17. Confluence Engine.
+18. Trade Setup Engine.
+19. Historical Pattern Engine.
+20. Backtesting Engine.
+21. Model Evaluation Engine.
+22. AI Chat Service.
+23. Alert Service.
+24. Trade Journal Service.
+
+Use background workers for expensive calculations.
+
+Keep the architecture modular so each component can be developed and tested independently.
+
+---
+
+# 33. DATABASE DESIGN
+
+Create PostgreSQL tables for:
+
+- Users.
+- User Settings.
+- Instruments.
+- Market Candles.
+- Market Quotes.
+- Historical Prices.
+- News Articles.
+- Economic Events.
+- Technical Indicators.
+- Liquidity Levels.
+- Order Book Snapshots.
+- Order Flow Records.
+- Detected Setups.
+- Predictions.
+- Prediction Outcomes.
+- Trade Setups.
+- Trade Journal.
+- Backtest Results.
+- Alerts.
+- Model Versions.
+- Model Metrics.
+
+Add appropriate indexes, timestamps and relationships.
+
+Use Redis for frequently accessed real-time information.
+
+---
+
+# 34. SECURITY & RELIABILITY
+
+Implement:
+
+- Secure authentication.
+- Password hashing.
+- Role-based access where needed.
+- API key protection.
+- Server-side secrets.
+- Input validation.
+- Rate limiting.
+- Error handling.
+- Logging.
+- Database backups.
+- WebSocket reconnection.
+- Health checks.
+- Monitoring.
+- Secure API endpoints.
+
+Financial prediction data should be traceable and auditable.
+
+Include an appropriate disclaimer that AI outputs are analytical estimates, not guaranteed financial advice.
+
+---
+
+# 35. DEVELOPMENT PHASES
+
+Build the application in the following sequence.
+
+### PHASE 1 — Foundation and UI
+
+- Project structure.
+- Monochromatic glassmorphism design.
+- Responsive sidebar.
+- Dashboard.
+- Navigation.
+- Reusable cards.
+- Animation system.
+- Charting workspace.
+
+### PHASE 2 — Live Market Data
+
+- XAUUSD integration.
+- GC1! integration.
+- Historical candles.
+- Real-time streaming.
+- Candlestick charts.
+- Line charts.
+- Multiple timeframes.
+- Market ticker.
+
+### PHASE 3 — Fundamental Intelligence
+
+- News.
+- Economic calendar.
+- DXY.
+- Treasury yields.
+- Macro dashboard.
+- News sentiment.
+- Fundamental analysis.
+
+### PHASE 4 — Technical Intelligence
+
+- ICT/SMC scanner.
+- Market structure.
+- BOS/MSS.
+- FVG.
+- Order Blocks.
+- Quasimodo.
+- Fibonacci.
+- VWAP.
+- Volume Profile.
+
+### PHASE 5 — Liquidity and Order Flow
+
+- Liquidity detection.
+- Multi-timeframe heatmaps.
+- Buyer/Seller pressure.
+- CVD.
+- Footprint.
+- Absorption.
+- Session intelligence.
+
+### PHASE 6 — AI Prediction Systems
+
+- Fundamental ML model.
+- Technical ML model.
+- Market regime detector.
+- Historical pattern recognition.
+- Confluence engine.
+- Prediction evaluation.
+
+### PHASE 7 — Trading Intelligence
+
+- Trade setup generator.
+- AI chatbot.
+- Smart alerts.
+- Risk calculator.
+- Trade journal.
+- Position sizing.
+
+### PHASE 8 — Research and Optimization
+
+- Backtesting.
+- Market replay.
+- Historical performance.
+- Walk-forward validation.
+- Model calibration.
+- Model drift detection.
+
+### PHASE 9 — Final Production
+
+- Security testing.
+- Performance optimization.
+- Integration testing.
+- Documentation.
+- Deployment.
+- Monitoring.
+
+---
+
+# 36. CRITICAL DEVELOPMENT RULES
+
+1. Do not create only a frontend mockup.
+2. Build actual backend services and integrations.
+3. Do not use fake live market data.
+4. Never invent prediction accuracy.
+5. Clearly identify demo data.
+6. Separate XAUUSD and GC1! datasets.
+7. Respect market data licensing.
+8. Make all charts interactive.
+9. Make all timeframes functional.
+10. Implement real calculations for indicators.
+11. Every AI prediction must be explainable.
+12. Keep technical and fundamental predictions independent.
+13. Implement the confluence engine as a separate layer.
+14. Prevent look-ahead bias in backtesting.
+15. Include error handling.
+16. Make the UI responsive.
+17. Optimize real-time rendering.
+18. Do not compromise readability for animations.
+19. Provide complete setup documentation.
+20. Never claim that an unavailable data source is connected.
+
+---
+
+# 37. PROJECT DELIVERABLES
+
+Deliver:
+
+- Complete Next.js frontend.
+- Complete Python FastAPI backend.
+- PostgreSQL database schema.
+- Redis integration.
+- WebSocket market streaming.
+- AI/ML model modules.
+- Technical analysis algorithms.
+- ICT/SMC detection algorithms.
+- Liquidity analysis.
+- Prediction engines.
+- Backtesting system.
+- Trade journal.
+- Market replay.
+- Smart alert system.
+- .env.example.
+- Docker configuration.
+- README.md.
+- API documentation.
+- Unit tests.
+- Integration tests.
+- Deployment instructions.
+
+---
+
+# 38. FINAL ACCEPTANCE CRITERIA
+
+The project is considered complete only when:
+
+1. Users can view live XAUUSD data.
+2. Users can view COMEX GC1! data independently.
+3. Users can switch between candlestick and line charts.
+4. Multiple timeframes work.
+5. Fundamental news is integrated.
+6. Economic calendar is functional.
+7. Technical indicators are calculated.
+8. ICT/SMC patterns are detected.
+9. Liquidity levels are visualized.
+10. Heatmap displays correctly sourced data.
+11. Buyer/Seller pressure is calculated using appropriately labelled data.
+12. Fundamental predictions work.
+13. Technical predictions work.
+14. Confluence engine works.
+15. Trade setup generator works.
+16. AI assistant can access the actual application data.
+17. Backtesting produces reproducible results.
+18. Prediction performance is measurable.
+19. Trade journal works.
+20. The complete interface follows the monochromatic transparent glassmorphism design.
+
+# 39. HOW TO EXECUTE THIS PROJECT
+
+Do not attempt to generate the entire application as one enormous unstructured code dump.
+
+First inspect the development environment.
+
+Then:
+
+1. Create a detailed project architecture.
+2. Create the directory structure.
+3. Establish the database schema.
+4. Build the design system.
+5. Implement the frontend.
+6. Implement backend services.
+7. Integrate actual market data.
+8. Implement analytical algorithms.
+9. Implement AI/ML models.
+10. Integrate all modules.
+11. Test every major feature.
+12. Optimize and deploy.
+
+Maintain a PROJECT_PROGRESS.md file.
+
+After every development phase:
+- Record completed modules.
+- Record incomplete modules.
+- Record API requirements.
+- Record bugs.
+- Record next implementation steps.
+
+Never mark an unimplemented feature as complete.
+
+If API credentials are unavailable, build the integration adapter and clearly document what is needed to activate it.
+
+Prioritize a working, reliable application over a large number of superficial features.
+
+# FINAL VISION
+
+GOLD INTELLIGENCE AI should become an advanced AI-powered Gold market research and trading intelligence platform.
+
+A user should be able to open the application and immediately understand:
+
+- What is happening in Gold?
+- Why is Gold moving?
+- What is the fundamental bias?
+- What is the technical bias?
+- Where is liquidity concentrated?
+- Has liquidity been swept?
+- What is the market structure?
+- Are buyers or sellers showing greater pressure?
+- What is the current volatility regime?
+- What is the likely next liquidity target?
+- Is there a valid trading opportunity?
+- What are the entry, stop loss and take-profit levels?
+- What evidence supports the AI prediction?
+- How accurate have previous predictions been?
+
+The platform should combine financial data engineering, quantitative research, ICT/SMC analysis, order-flow intelligence and explainable AI.
+
+Build it as a professional institutional-grade product with an elegant monochromatic transparent glassmorphism interface.
+
+Start with the project architecture and immediately begin implementation.

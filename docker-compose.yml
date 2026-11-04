@@ -1,0 +1,74 @@
+# GOLD INTELLIGENCE AI — production deployment
+# The sandbox/dev runtime uses SQLite + in-memory cache out of the box.
+# This compose file provisions the production-grade stack: PostgreSQL,
+# Redis, the ML microservice, and the platform itself.
+#
+#   docker compose up -d --build
+#
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gold
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set in .env}
+      POSTGRES_DB: gold_intelligence
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gold -d gold_intelligence"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ml:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "8085:8085"
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request as u; u.urlopen('http://localhost:8085/ml/health')\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # DATABASE_URL: switch to Postgres for production (schema is portable):
+      DATABASE_URL: postgresql://gold:${POSTGRES_PASSWORD}@postgres:5432/gold_intelligence
+      REDIS_URL: redis://redis:6379/0
+      ML_SERVICE_URL: http://ml:8085
+      TWELVEDATA_API_KEY: ${TWELVEDATA_API_KEY:-}
+      FINNHUB_API_KEY: ${FINNHUB_API_KEY:-}
+      FRED_API_KEY: ${FRED_API_KEY:-}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  redisdata:
