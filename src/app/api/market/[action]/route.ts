@@ -31,6 +31,9 @@ export async function GET(
   try {
     switch (action) {
       case "ticker": {
+        const hit = cache.get<unknown>("market:ticker:payload");
+        if (hit) return NextResponse.json(hit);
+
         const [xau, gc, gcDaily, xauDaily] = await Promise.all([
           getQuote("XAUUSD"),
           getQuote("GC1!"),
@@ -43,14 +46,16 @@ export async function GET(
           return { abs: +(b - a).toFixed(2), pct: +(((b - a) / a) * 100).toFixed(2) };
         };
         const sessions = sessionStates([]);
-        return NextResponse.json({
+        const payload = {
           xauusd: { ...xau, change: change(xauDaily.candles) },
           gc1: { ...gc, change: change(gcDaily.candles) },
           session: activeSession(sessions),
           marketOpen: marketOpen(),
           serverTime: new Date().toISOString(),
           instruments: INSTRUMENTS,
-        });
+        };
+        cache.set("market:ticker:payload", payload, 4);
+        return NextResponse.json(payload);
       }
       case "quote": {
         const q = await getQuote(parseInstrument(url.searchParams.get("instrument")));
@@ -64,6 +69,9 @@ export async function GET(
         return NextResponse.json(r);
       }
       case "overview": {
+        const hit = cache.get<unknown>("market:overview:cards");
+        if (hit) return NextResponse.json(hit);
+
         const [xau, gc, macro, news, volCandles] = await Promise.all([
           getQuote("XAUUSD").catch(() => null),
           getQuote("GC1!").catch(() => null),
@@ -73,7 +81,7 @@ export async function GET(
         ]);
         const vol = volCandles ? buildVolatilityReport([], volCandles.candles, volCandles.candles.slice(-20)) : null;
         const byKey = new Map(macro.map((m) => [m.key, m]));
-        return NextResponse.json({
+        const payload = {
           cards: [
             { key: "XAUUSD", label: "Gold Spot XAU/USD", quote: xau },
             { key: "GC1!", label: "COMEX Gold GC1!", quote: gc },
@@ -85,7 +93,9 @@ export async function GET(
             { key: "SENTIMENT", label: "Market Sentiment (news)", value: aggregateSentiment(news), note: `${news.length} classified articles` },
           ],
           serverTime: new Date().toISOString(),
-        });
+        };
+        cache.set("market:overview:cards", payload, 20);
+        return NextResponse.json(payload);
       }
       case "macro": {
         const assets = await getMacroAssets();

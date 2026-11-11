@@ -25,7 +25,7 @@ export const INSTRUMENTS: Record<Instrument, { name: string; kind: "spot" | "fut
   "GC1!": { name: "COMEX Gold Futures (GC1! front month)", kind: "future", note: "CME COMEX GC front-month continuous" },
 };
 
-const CANDLE_TTL: Partial<Record<Timeframe, number>> = { "1m": 3, "3m": 5, "5m": 5, "15m": 8, "30m": 15, "1h": 30, "2h": 60, "4h": 60, "1d": 120 };
+const CANDLE_TTL: Partial<Record<Timeframe, number>> = { "1m": 5, "3m": 10, "5m": 15, "15m": 25, "30m": 45, "1h": 60, "2h": 120, "4h": 180, "1d": 300 };
 
 export async function getCandles(instrument: Instrument, timeframe: Timeframe, limit = 900): Promise<CandleResponse> {
   const key = `candles:${instrument}:${timeframe}:${limit}`;
@@ -128,7 +128,7 @@ export async function getQuote(instrument: Instrument): Promise<QuoteResponse> {
       }
     }
   }
-  cache.set(key, resp, 2);
+  cache.set(key, resp, 6);
   return resp;
 }
 
@@ -168,7 +168,7 @@ export async function getMacroAssets(): Promise<MacroAsset[]> {
     }),
   );
   const assets = results.filter((r): r is PromiseFulfilledResult<MacroAsset> => r.status === "fulfilled").map((r) => r.value);
-  cache.set(key, assets, 60);
+  cache.set(key, assets, 180);
   return assets;
 }
 

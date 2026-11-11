@@ -213,7 +213,7 @@ export async function fetchAndStoreNews(): Promise<ClassifiedNews[]> {
     }
   } catch { /* db optional for news display */ }
 
-  cache.set(key, classified, 120);
+  cache.set(key, classified, 300);
   return classified;
 }
 
