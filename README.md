@@ -1,8 +1,17 @@
-# GOLD INTELLIGENCE AI
+# Gold (XAU/USD) Top-Down Analysis — GOLD INTELLIGENCE AI
 
 **Understand the Market. Decode Liquidity. Predict with Intelligence.**
 
-An institutional-grade AI market intelligence & prediction platform for Gold — **XAUUSD (spot)** and **GC1! (COMEX front-month futures)** — built as a production-quality full-stack application.
+**Author:** [Satyam Vaish](https://github.com/satyam-vaish) · [LinkedIn](https://www.linkedin.com/in/satyam-vaish) · `Oct 2026 – Nov 2026`
+
+An institutional-grade **Top-Down Price Action & AI Market Intelligence Platform** for Gold — **XAUUSD (spot)** and **GC1! (COMEX front-month futures)** — built as a production-quality full-stack application.
+
+### Top-Down Analysis Methodology
+
+- **Multi-Timeframe Directional Bias:** Establishes higher-timeframe structural bias (`1D`, `4H`, `1H`) and refines lower-timeframe execution confirmations (`15m`, `5m`, `1m`).
+- **Price Action & Market Structure:** Tracks swing highs/lows, Break of Structure (BOS), Change of Character (CHoCH), and Market Structure Shifts (MSS) across all timeframes.
+- **Key Levels & Liquidity Mapping:** Identifies support/resistance, supply/demand zones (Fair Value Gaps & Order Blocks), PDH/PDL, PWH/PWL, and buy-side/sell-side liquidity pools with documented reasoning.
+- **Entry Alignment:** Synchronizes lower-timeframe entry confirmations with higher-timeframe bias so every trade setup remains aligned with overall market direction.
 
 > ⚠️ **Disclaimer:** AI outputs are analytical estimates, not guaranteed financial advice. Data statuses (`LIVE / DELAYED / DEMO / ESTIMATED / PROXY`) are labelled on every module. The platform never fabricates prices, order-book depth, news or accuracy figures.
 
