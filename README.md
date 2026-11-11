@@ -2,7 +2,7 @@
 
 **Understand the Market. Decode Liquidity. Predict with Intelligence.**
 
-**Author:** [Satyam Vaish](https://github.com/satyam-vaish) · [LinkedIn](https://www.linkedin.com/in/satyam-vaish) · `Oct 2026 – Nov 2026`
+**Author:** [Satyam Vaish](https://github.com/satyam-vaish) · [LinkedIn](https://www.linkedin.com/in/satyam-vasih07/) · `Oct 2026 – Nov 2026`
 
 An institutional-grade **Top-Down Price Action & AI Market Intelligence Platform** for Gold — **XAUUSD (spot)** and **GC1! (COMEX front-month futures)** — built as a production-quality full-stack application.
 
