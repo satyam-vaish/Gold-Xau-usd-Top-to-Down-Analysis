@@ -5,6 +5,7 @@ import { getQuote } from "@/lib/server/marketData";
 import { fetchAndStoreNews, aggregateSentiment } from "@/lib/server/news";
 import { getUpcomingEvents } from "@/lib/server/calendar";
 import { db } from "@/lib/db";
+import { generateGroundedResponse } from "@/lib/server/groundedAssistant";
 import type { Instrument } from "@/lib/engines/types";
 
 export const dynamic = "force-dynamic";
@@ -112,17 +113,57 @@ ${JSON.stringify(snapshot)}
 </snapshot>
 END OF SNAPSHOT — now answer the user's question in clean prose.`;
 
-    const zai = await ZAI.create();
-    const completion = await zai.chat.completions.create({
-      messages: [
-        { role: "assistant", content: systemPrompt },
-        ...history.map((h) => ({ role: h.role, content: h.content })),
-        { role: "user", content: message },
-      ],
-      thinking: { type: "disabled" },
-    });
+    let answer = "";
 
-    const answer = completion.choices[0]?.message?.content ?? "The assistant could not produce a response.";
+    // 1. Try ZAI SDK if configured
+    try {
+      const zai = await ZAI.create();
+      const completion = await zai.chat.completions.create({
+        messages: [
+          { role: "assistant", content: systemPrompt },
+          ...history.map((h) => ({ role: h.role, content: h.content })),
+          { role: "user", content: message },
+        ],
+        thinking: { type: "disabled" },
+      });
+      answer = completion.choices[0]?.message?.content ?? "";
+    } catch {
+      // ZAI SDK missing configuration file (.z-ai-config) or failed; proceed to fallback
+    }
+
+    // 2. Try standard OpenAI API if OPENAI_API_KEY is configured
+    if (!answer && process.env.OPENAI_API_KEY) {
+      try {
+        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+            messages: [
+              { role: "system", content: systemPrompt },
+              ...history.map((h) => ({ role: h.role, content: h.content })),
+              { role: "user", content: message },
+            ],
+            temperature: 0.3,
+          }),
+        });
+        if (res.ok) {
+          const data = (await res.json()) as { choices?: Array<{ message?: { content?: string } }> };
+          answer = data.choices?.[0]?.message?.content ?? "";
+        }
+      } catch {
+        // OpenAI failed, proceed to grounded engine
+      }
+    }
+
+    // 3. Fallback to Grounded Institutional Market Intelligence Engine
+    if (!answer) {
+      answer = generateGroundedResponse(message, snapshot, analysis, conf, setups);
+    }
+
     return NextResponse.json({
       answer,
       snapshotTime: snapshot.meta.snapshotTime,
