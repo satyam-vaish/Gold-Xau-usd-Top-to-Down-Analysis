@@ -4,7 +4,7 @@ import { generateGroundedResponse, type GroundedSnapshot } from "../src/lib/serv
 describe("grounded AI Assistant", () => {
   const mockSnapshot: GroundedSnapshot = {
     meta: {
-      instrument: "XAUUSD",
+      instrument: "GC1!",
       snapshotTime: "2026-11-17T18:00:00.000Z",
       note: "Live provider data test",
     },
@@ -108,7 +108,7 @@ describe("grounded AI Assistant", () => {
   });
 
   it("answers Bias questions with confluence score and invalidation level", () => {
-    const ans = generateGroundedResponse("What is the current XAUUSD bias?", mockSnapshot);
+    const ans = generateGroundedResponse("What is the current GC COMEX bias?", mockSnapshot);
     expect(ans).toContain("BULLISH");
     expect(ans).toContain("+65");
     expect(ans).toContain("2620.00");
@@ -135,3 +135,4 @@ describe("grounded AI Assistant", () => {
     expect(ans).toContain("+1420");
   });
 });
+

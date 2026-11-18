@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       data: {
         userId: user.id,
         tradeDate: b.tradeDate ? new Date(b.tradeDate as string) : new Date(),
-        instrument: (b.instrument as string) ?? "XAUUSD",
+        instrument: (b.instrument as string) ?? "GC1!",
         direction: (b.direction as string) ?? "LONG",
         entry: Number(b.entry ?? 0),
         stopLoss: b.stopLoss != null ? Number(b.stopLoss) : null,

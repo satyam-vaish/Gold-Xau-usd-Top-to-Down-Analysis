@@ -34,7 +34,7 @@ interface OverlayResp {
 const OVERLAY_KEYS = ["fvg", "orderBlocks", "liquidity", "fib", "vwap", "pdhPdl", "structure"] as const;
 
 export function LiveGoldCharts() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("XAUUSD");
+  const [instrument] = useState<"GC1!">("GC1!");
   const [tf, setTf] = useState<Timeframe>("15m");
   const [chartType, setChartType] = useState<(typeof TYPES)[number]>("candles");
   const [toggles, setToggles] = useState<Record<string, boolean>>({
@@ -48,7 +48,7 @@ export function LiveGoldCharts() {
   const pollInterval = tf === "1m" ? 3000 : tf === "5m" || tf === "15m" ? 5000 : 10000;
 
   const { data, error, isLoading } = useApi<OverlayResp>(
-    `/api/analysis/overlay?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}&tf=${tf}`,
+    `/api/analysis/overlay?instrument=gc&tf=${tf}`,
     pollInterval,
   );
 
@@ -67,8 +67,7 @@ export function LiveGoldCharts() {
       <GlassPanel className="p-3">
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-1.5 mr-2">
-            <Chip active={instrument === "XAUUSD"} onClick={() => setInstrument("XAUUSD")}>XAUUSD · Spot</Chip>
-            <Chip active={instrument === "GC1!"} onClick={() => setInstrument("GC1!")}>GC1! · COMEX Futures</Chip>
+            <Chip active={true}>GC1! · COMEX Futures</Chip>
           </div>
           <span className="w-px h-5 bg-white/10 mx-1" />
           {TYPES.map((t) => (
@@ -133,7 +132,7 @@ export function LiveGoldCharts() {
         </GlassPanel>
         <GlassPanel className="p-4">
           <SectionTitle title="Instrument Separation" />
-          <KV k="Active instrument" v={instrument} />
+          <KV k="Active instrument" v="GC1! · COMEX Futures" />
           <KV k="Live Stream Status" v={connected ? "Active (WebSocket)" : "Polling Fallback"} mono={false} />
           <KV k="Policy" v="Strict separation — datasets never merged" mono={false} />
         </GlassPanel>

@@ -50,14 +50,13 @@ type FullAnalysis = {
 const TFS = ["15m", "1h", "4h", "1d"] as const;
 
 export function TechnicalIntelligence() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
-  const a = useApi<FullAnalysis>(`/api/analysis/full?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 45000);
+  const [instrument] = useState<"GC1!">("GC1!");
+  const a = useApi<FullAnalysis>("/api/analysis/full?instrument=gc", 45000);
 
   return (
     <div className="space-y-4">
       <div className="flex gap-1.5">
-        <Chip active={instrument === "XAUUSD"} onClick={() => setInstrument("XAUUSD")}>XAUUSD</Chip>
-        <Chip active={instrument === "GC1!"} onClick={() => setInstrument("GC1!")}>GC1!</Chip>
+        <Chip active={true}>GC1! · COMEX</Chip>
       </div>
 
       {/* Multi-timeframe confluence matrix */}
@@ -147,9 +146,9 @@ export function TechnicalIntelligence() {
 }
 
 export function IctScanner() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument] = useState<"GC1!">("GC1!");
   const [minSize, setMinSize] = useState(0);
-  const a = useApi<FullAnalysis>(`/api/analysis/full?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 45000);
+  const a = useApi<FullAnalysis>("/api/analysis/full?instrument=gc", 45000);
   const [confirmSweep, setConfirmSweep] = useState(true);
 
   const fvg = (a.data?.ict.fvg ?? []).filter((f) => f.size >= minSize && (!confirmSweep || !f.filled));
@@ -158,8 +157,7 @@ export function IctScanner() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-1.5 items-center">
-        <Chip active={instrument === "XAUUSD"} onClick={() => setInstrument("XAUUSD")}>XAUUSD</Chip>
-        <Chip active={instrument === "GC1!"} onClick={() => setInstrument("GC1!")}>GC1!</Chip>
+        <Chip active={true}>GC1! · COMEX</Chip>
         <span className="w-px h-5 bg-white/10 mx-1" />
         <Chip active={confirmSweep} onClick={() => setConfirmSweep((v) => !v)}>Confirmation filter (unfilled / reclaimed only)</Chip>
         <span className="text-[10px] text-zinc-600">Min FVG size $</span>

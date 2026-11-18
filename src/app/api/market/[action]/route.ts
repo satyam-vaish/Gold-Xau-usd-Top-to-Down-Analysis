@@ -9,7 +9,7 @@ import type { Instrument, Timeframe } from "@/lib/engines/types";
 export const dynamic = "force-dynamic";
 
 function parseInstrument(v: string | null): Instrument {
-  return v === "GC1!" || v === "gc" ? "GC1!" : "XAUUSD";
+  return v === "XAUUSD" || v === "xauusd" ? "XAUUSD" : "GC1!";
 }
 
 /**

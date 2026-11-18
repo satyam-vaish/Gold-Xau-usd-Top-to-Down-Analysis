@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       data: {
         userId: user.id,
         kind: b.kind,
-        instrument: b.instrument ?? "XAUUSD",
+        instrument: b.instrument ?? "GC1!",
         params: JSON.stringify(b.params ?? {}),
         channels: JSON.stringify(b.channels ?? ["in_app"]),
         active: true,

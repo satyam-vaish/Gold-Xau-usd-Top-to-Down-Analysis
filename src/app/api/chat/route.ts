@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     if (!message.trim()) {
       return NextResponse.json({ error: "Message required" }, { status: 400 });
     }
-    const instrument: Instrument = body.instrument === "GC1!" ? "GC1!" : "XAUUSD";
+    const instrument: Instrument = body.instrument === "XAUUSD" ? "XAUUSD" : "GC1!";
     const history = (body.history ?? []).slice(-8);
 
     // ---- Retrieval: build the live data snapshot ----

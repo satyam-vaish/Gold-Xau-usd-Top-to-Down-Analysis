@@ -125,24 +125,7 @@ function Ticker() {
   return (
     <div className="flex items-center gap-4 lg:gap-6 overflow-x-auto whitespace-nowrap px-4 h-12">
       <div className="flex items-center gap-2 shrink-0">
-        <span className="text-[9px] uppercase tracking-[0.18em] text-zinc-600">XAUUSD</span>
-        <motion.span
-          key={xau}
-          initial={{ opacity: 0.4 }} animate={{ opacity: 1 }}
-          className={`num text-[13px] font-semibold ${xauDir > 0 ? "text-zinc-50" : xauDir < 0 ? "text-zinc-400" : "text-zinc-200"}`}
-        >
-          {xau !== null ? xau.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "—"}
-        </motion.span>
-        {data?.xauusd.change ? (
-          <span className={`num text-[10px] ${data.xauusd.change.pct >= 0 ? "text-zinc-300" : "text-zinc-500"}`}>
-            {data.xauusd.change.pct >= 0 ? "+" : ""}{data.xauusd.change.abs} ({data.xauusd.change.pct}%)
-          </span>
-        ) : null}
-        <StatusBadge status={xauLive ? "LIVE" : data?.xauusd.status ?? "…"} />
-      </div>
-      <div className="w-px h-5 bg-white/10 shrink-0" />
-      <div className="flex items-center gap-2 shrink-0">
-        <span className="text-[9px] uppercase tracking-[0.18em] text-zinc-600">GC1!</span>
+        <span className="text-[9px] uppercase tracking-[0.18em] text-zinc-400 font-semibold">GC1! · COMEX</span>
         <motion.span
           key={gc}
           initial={{ opacity: 0.4 }} animate={{ opacity: 1 }}
@@ -155,7 +138,7 @@ function Ticker() {
             {data.gc1.change.pct >= 0 ? "+" : ""}{data.gc1.change.abs} ({data.gc1.change.pct}%)
           </span>
         ) : null}
-        <StatusBadge status={gcLive ? data?.gc1.status ?? "DELAYED" : data?.gc1.status ?? "…"} />
+        <StatusBadge status={gcLive ? "LIVE" : data?.gc1.status ?? "…"} />
       </div>
       <div className="w-px h-5 bg-white/10 shrink-0 hidden md:block" />
       <div className="hidden md:flex items-center gap-2 shrink-0">
@@ -176,9 +159,9 @@ function Ticker() {
 // ---------------------------------------------------------------------------
 
 function AiIntelPanel({ onNavigate }: { onNavigate: (v: string) => void }) {
-  const { data: conf } = useApi<ConfluenceOutput>("/api/ai/confluence", 12000);
-  const { data: preds } = useApi<{ technical: { horizon: string; direction: string; probBull: number; probBear: number }[] }>("/api/ai/predictions", 15000);
-  const { data: analysis } = useApi<{ liquidity: { likelyTarget: { label: string; price: number; side: string } | null; targetConfidence: number }; activeSessionName: string; regime: { regime: string }; volatility: { rangeConsumedPct: number; regime: string } }>("/api/analysis/full", 12000);
+  const { data: conf } = useApi<ConfluenceOutput>("/api/ai/confluence?instrument=gc", 12000);
+  const { data: preds } = useApi<{ technical: { horizon: string; direction: string; probBull: number; probBear: number }[] }>("/api/ai/predictions?instrument=gc", 15000);
+  const { data: analysis } = useApi<{ liquidity: { likelyTarget: { label: string; price: number; side: string } | null; targetConfidence: number }; activeSessionName: string; regime: { regime: string }; volatility: { rangeConsumedPct: number; regime: string } }>("/api/analysis/full?instrument=gc", 12000);
   const h1 = preds?.technical?.find((p) => p.horizon === "1h");
 
   return (
@@ -437,7 +420,7 @@ export default function Home() {
               <p className="text-[10px] text-zinc-600 mt-0.5">Understand the Market · Decode Liquidity · Predict with Intelligence</p>
             </div>
             <div className="hidden md:flex items-center gap-2">
-              <StatusBadge status={quotes["XAUUSD"] ? "STREAM LIVE" : "POLLING"} />
+              <StatusBadge status={quotes["GC1!"] ? "STREAM LIVE" : "POLLING"} />
             </div>
           </div>
           <AnimatePresence mode="wait">
@@ -474,7 +457,7 @@ export default function Home() {
         <div className="flex items-center gap-4 px-4 h-9 text-[9px] text-zinc-600 overflow-hidden">
           <span className="uppercase tracking-[0.2em] text-zinc-500 shrink-0">GOLD INTELLIGENCE AI</span>
           <span className="hidden md:inline truncate">AI outputs are analytical estimates, not financial advice</span>
-          <span className="hidden lg:inline num">XAUUSD: {quotes["XAUUSD"]?.price ?? "…"} · GC1!: {quotes["GC1!"]?.price ?? "…"}</span>
+          <span className="hidden lg:inline num">GC1! (COMEX Futures): {quotes["GC1!"]?.price ?? "…"}</span>
           <span className="ml-auto num shrink-0" suppressHydrationWarning>{now ? now.toISOString().slice(11, 19) : "--:--:--"} UTC</span>
         </div>
       </footer>

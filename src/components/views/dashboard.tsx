@@ -51,10 +51,10 @@ export function OverviewDashboard({ onNavigate }: { onNavigate: (id: string) => 
   const gcLive = quotes["GC1!"]?.price ?? ticker?.gc1.price ?? null;
   const [tab, setTab] = useState<"summary" | "ict">("summary");
 
-  const [chartInstrument, setChartInstrument] = useState<"XAUUSD" | "GC1!">("XAUUSD");
+  const chartInstrument = "GC1!";
   const [chartTf, setChartTf] = useState<"5m" | "15m" | "1h" | "1d">("15m");
   const { data: chartCandles, isLoading: chartLoading } = useApi<{ candles: Candle[]; source: string; status: string; asOf: string }>(
-    `/api/market/candles?instrument=${chartInstrument}&tf=${chartTf}&limit=160`,
+    `/api/market/candles?instrument=GC1!&tf=${chartTf}&limit=160`,
     4000,
   );
   const liveQuoteForOverview = quotes[chartInstrument] ?? null;
@@ -64,25 +64,20 @@ export function OverviewDashboard({ onNavigate }: { onNavigate: (id: string) => 
       {/* Hero row */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
         <StatCard
-          label="Gold Spot · XAUUSD"
-          value={<PriceCell value={xauLive} />}
+          label="COMEX Gold Futures · GC1!"
+          value={<PriceCell value={gcLive} />}
           sub={ticker ? (
             <span className="flex items-center gap-2">
-              <DeltaCell value={ticker.xauusd.change?.pct ?? null} />
-              <StatusBadge status={quotes["XAUUSD"] ? "LIVE" : ticker.xauusd.status} />
+              <DeltaCell value={ticker.gc1.change?.pct ?? null} />
+              <StatusBadge status={quotes["GC1!"] ? "LIVE" : ticker.gc1.status} />
             </span>
           ) : null}
           delay={0}
         />
         <StatCard
-          label="COMEX Futures · GC1!"
-          value={<PriceCell value={gcLive} />}
-          sub={ticker ? (
-            <span className="flex items-center gap-2">
-              <DeltaCell value={ticker.gc1.change?.pct ?? null} />
-              <StatusBadge status={quotes["GC1!"] ? ticker.gc1.status : ticker.gc1.status} />
-            </span>
-          ) : null}
+          label="24h Range / ADR"
+          value={analysis ? `$${analysis.volatility.dailyRange.toFixed(2)}` : "—"}
+          sub={analysis ? `${analysis.volatility.rangeConsumedPct.toFixed(0)}% of ADR ($${analysis.volatility.adr.toFixed(1)})` : "loading"}
           delay={0.05}
         />
         <StatCard
@@ -111,13 +106,12 @@ export function OverviewDashboard({ onNavigate }: { onNavigate: (id: string) => 
             <span className="text-[12px] font-semibold text-zinc-100 tracking-wide">Live Gold Price & Chart</span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#FFE600] animate-pulse" />
             <span className="text-[11px] font-semibold text-[#FFE600] font-mono">
-              {liveQuoteForOverview?.price ? `$${liveQuoteForOverview.price.toFixed(2)}` : xauLive ? `$${xauLive.toFixed(2)}` : "Streaming…"}
+              {liveQuoteForOverview?.price ? `$${liveQuoteForOverview.price.toFixed(2)}` : gcLive ? `$${gcLive.toFixed(2)}` : "Streaming…"}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1">
-              <Chip active={chartInstrument === "XAUUSD"} onClick={() => setChartInstrument("XAUUSD")}>XAUUSD · Spot</Chip>
-              <Chip active={chartInstrument === "GC1!"} onClick={() => setChartInstrument("GC1!")}>GC1! · Futures</Chip>
+              <Chip active={true}>GC1! · COMEX Futures</Chip>
             </div>
             <span className="w-px h-4 bg-[#151515]" />
             <div className="flex items-center gap-1">

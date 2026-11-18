@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       name?: string;
       walkForward?: boolean;
     };
-    const instrument: Instrument = b.instrument === "GC1!" ? "GC1!" : "XAUUSD";
+    const instrument: Instrument = b.instrument === "XAUUSD" ? "XAUUSD" : "GC1!";
     const timeframe: Timeframe = (b.timeframe ?? "15m") as Timeframe;
     const strategy: StrategyName = STRATEGIES.includes(b.strategy as StrategyName) ? (b.strategy as StrategyName) : "ICT_LIQUIDITY_SWEEP";
     const days = Math.min(Math.max(b.days ?? 30, 5), 180);

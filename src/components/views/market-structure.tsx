@@ -42,11 +42,10 @@ type Full = {
   };
 };
 
-function InstrumentPicker({ value, onChange }: { value: string; onChange: (v: "XAUUSD" | "GC1!") => void }) {
+function InstrumentPicker({ value, onChange }: { value?: string; onChange?: (v: "GC1!") => void }) {
   return (
     <div className="flex gap-1.5">
-      <Chip active={value === "XAUUSD"} onClick={() => onChange("XAUUSD")}>XAUUSD</Chip>
-      <Chip active={value === "GC1!"} onClick={() => onChange("GC1!")}>GC1!</Chip>
+      <Chip active={true}>GC1! · COMEX</Chip>
     </div>
   );
 }
@@ -54,7 +53,7 @@ function InstrumentPicker({ value, onChange }: { value: string; onChange: (v: "X
 // ---------------------------------------------------------------------------
 
 export function LiquidityIntelligence() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument, setInstrument] = useState<"GC1!">("GC1!");
   const { data } = useApi<Full>(`/api/analysis/full?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 45000);
 
   return (
@@ -124,7 +123,7 @@ export function LiquidityIntelligence() {
 // ---------------------------------------------------------------------------
 
 export function LiquidityHeatmap() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument, setInstrument] = useState<"GC1!">("GC1!");
   const [tf, setTf] = useState("15m");
   const { data } = useApi<Full>(`/api/analysis/full?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}&tf=${tf}`, 45000);
   const [filter, setFilter] = useState(0); // min intensity filter
@@ -209,7 +208,7 @@ export function LiquidityHeatmap() {
 // ---------------------------------------------------------------------------
 
 export function SessionIntelligence() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument, setInstrument] = useState<"GC1!">("GC1!");
   const { data } = useApi<Full>(`/api/analysis/full?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 45000);
 
   return (
@@ -266,7 +265,7 @@ export function SessionIntelligence() {
 // ---------------------------------------------------------------------------
 
 export function VolatilityIntelligence() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument, setInstrument] = useState<"GC1!">("GC1!");
   const { data } = useApi<Full>(`/api/analysis/full?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 45000);
 
   return (
@@ -305,7 +304,7 @@ export function VolatilityIntelligence() {
 // ---------------------------------------------------------------------------
 
 export function OrderFlowAnalysis() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument, setInstrument] = useState<"GC1!">("GC1!");
   const { data } = useApi<Full>(`/api/analysis/full?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 30000);
 
   const cvdSeries = useMemo(() => {

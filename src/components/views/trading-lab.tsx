@@ -27,7 +27,7 @@ export function TradeJournal() {
   const entries = useApi<{ entries: Record<string, unknown>[] }>("/api/journal", 30000);
   const stats = useApi<JournalStats>("/api/journal/stats", 30000);
   const { post } = usePost<{ entry: Record<string, unknown> }>();
-  const [form, setForm] = useState({ instrument: "XAUUSD", direction: "LONG", entry: "", stopLoss: "", takeProfit: "", exit: "", size: "", session: "LONDON", timeframe: "15m", setupType: "LIQUIDITY_SWEEP_FVG", outcome: "OPEN", pnl: "", notes: "" });
+  const [form, setForm] = useState({ instrument: "GC1!", direction: "LONG", entry: "", stopLoss: "", takeProfit: "", exit: "", size: "", session: "LONDON", timeframe: "15m", setupType: "LIQUIDITY_SWEEP_FVG", outcome: "OPEN", pnl: "", notes: "" });
   const [saving, setSaving] = useState(false);
 
   const submit = async () => {
@@ -82,7 +82,7 @@ export function TradeJournal() {
           <div className="space-y-2">
             <div className="grid grid-cols-2 gap-2">
               <select value={form.instrument} onChange={(e) => setForm({ ...form, instrument: e.target.value })} className="bg-white/[0.04] border border-white/10 rounded-lg px-2 py-2 text-[11px] text-zinc-200">
-                <option>XAUUSD</option><option>GC1!</option>
+                <option value="GC1!">GC1! · COMEX</option>
               </select>
               <select value={form.direction} onChange={(e) => setForm({ ...form, direction: e.target.value })} className="bg-white/[0.04] border border-white/10 rounded-lg px-2 py-2 text-[11px] text-zinc-200">
                 <option>LONG</option><option>SHORT</option>
@@ -216,7 +216,7 @@ export function StrategyBacktester() {
             {(strategies.data?.strategies ?? [{ id: "ICT_LIQUIDITY_SWEEP", label: "ICT Liquidity Sweep" }]).map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
           </select>
           <select value={params.instrument} onChange={(e) => setParams({ ...params, instrument: e.target.value })} className="bg-white/[0.04] border border-white/10 rounded-lg px-2 py-2 text-[11px] text-zinc-200">
-            <option value="GC1!">GC1!</option><option value="XAUUSD">XAUUSD</option>
+            <option value="GC1!">GC1! · COMEX</option>
           </select>
           <select value={params.timeframe} onChange={(e) => setParams({ ...params, timeframe: e.target.value })} className="bg-white/[0.04] border border-white/10 rounded-lg px-2 py-2 text-[11px] text-zinc-200">
             {["5m", "15m", "30m", "1h"].map((t) => <option key={t}>{t}</option>)}

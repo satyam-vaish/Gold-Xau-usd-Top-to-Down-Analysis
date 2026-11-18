@@ -11,7 +11,7 @@ import { Chip, GlassPanel, SectionTitle, StatusBadge } from "@/components/glass/
 interface Msg { role: "user" | "assistant"; content: string; time: string }
 
 const SUGGESTIONS = [
-  "What is the current XAUUSD bias?",
+  "What is the current GC COMEX bias?",
   "What is the 4H market structure?",
   "Where is the nearest liquidity?",
   "Has a bullish MSS formed?",
@@ -29,7 +29,7 @@ export function AiAssistant() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("XAUUSD");
+  const [instrument] = useState<"GC1!">("GC1!");
   const [meta, setMeta] = useState<{ snapshotTime?: string; sources?: string[]; price?: number | null; status?: string | null } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -76,8 +76,7 @@ export function AiAssistant() {
               {meta?.price ? <span className="text-[10px] num text-zinc-500">snapshot @ {meta.price} <StatusBadge status={meta.status ?? "…"} /></span> : null}
             </div>
             <div className="flex gap-1.5">
-              <Chip active={instrument === "XAUUSD"} onClick={() => setInstrument("XAUUSD")}>XAUUSD</Chip>
-              <Chip active={instrument === "GC1!"} onClick={() => setInstrument("GC1!")}>GC1!</Chip>
+              <Chip active={true}>GC1! · COMEX</Chip>
             </div>
           </div>
 

@@ -35,7 +35,7 @@ export function SmartAlerts() {
   const { alertEvents } = useLiveQuotes();
   const toasts = alertEvents.map((a) => ({ message: a.message, time: a.time }));
   const [kind, setKind] = useState("PRICE_LEVEL");
-  const [instrument, setInstrument] = useState("XAUUSD");
+  const [instrument, setInstrument] = useState("GC1!");
   const [price, setPrice] = useState("");
   const [threshold, setThreshold] = useState("3");
   const [browserAllowed, setBrowserAllowed] = useState(false);
@@ -92,7 +92,7 @@ export function SmartAlerts() {
               {ALERT_KINDS.map((a) => <option key={a.kind} value={a.kind}>{a.label}</option>)}
             </select>
             <select value={instrument} onChange={(e) => setInstrument(e.target.value)} className="w-full bg-white/[0.04] border border-white/10 rounded-lg px-2 py-2 text-[11px] text-zinc-200">
-              <option>XAUUSD</option><option>GC1!</option>
+              <option value="GC1!">GC1! · COMEX</option>
             </select>
             {selected?.needsPrice && (
               <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Price level" inputMode="decimal"
@@ -221,9 +221,8 @@ export function RiskManagement() {
           <GlassPanel className="p-4" delay={0.1}>
             <SectionTitle title="Account settings" />
             <div className="flex flex-wrap gap-2 items-center">
-              <Chip active={(data?.settings?.defaultInstrument ?? "XAUUSD") === "XAUUSD"}>Default: XAUUSD</Chip>
-              <Chip active={(data?.settings?.defaultInstrument ?? "") === "GC1!"}>Default: GC1!</Chip>
-              <span className="text-[10px] text-zinc-500 num" suppressHydrationWarning>live XAU {quotes["XAUUSD"]?.price ?? "…"} · {now ? now.toISOString().slice(11, 19) : "--:--:--"} UTC</span>
+              <Chip active={true}>Default: GC1! (COMEX)</Chip>
+              <span className="text-[10px] text-zinc-500 num" suppressHydrationWarning>live GC1! {quotes["GC1!"]?.price ?? "…"} · {now ? now.toISOString().slice(11, 19) : "--:--:--"} UTC</span>
             </div>
             <p className="text-[10px] text-zinc-600 mt-2">Balance, risk % and loss limits persist to the database (Settings view allows edits). {stats.data?.totals.closed ?? 0} closed journal trades feed the trackers.</p>
             <button onClick={() => void mutate()} className="mt-2 text-[10px] text-zinc-500 hover:text-zinc-300">refresh</button>
@@ -341,8 +340,7 @@ export function SettingsView() {
         {s ? (
           <div className="space-y-3">
             <div className="flex flex-wrap gap-1.5">
-              <Chip active={s.defaultInstrument === "XAUUSD"} onClick={() => void patch({ defaultInstrument: "XAUUSD" })}>Default XAUUSD</Chip>
-              <Chip active={s.defaultInstrument === "GC1!"} onClick={() => void patch({ defaultInstrument: "GC1!" })}>Default GC1!</Chip>
+              <Chip active={true} onClick={() => void patch({ defaultInstrument: "GC1!" })}>Default: GC1! (COMEX)</Chip>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {["candles", "line", "area", "bars"].map((c) => (

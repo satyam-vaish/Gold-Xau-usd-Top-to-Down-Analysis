@@ -15,9 +15,9 @@ import type { ConfluenceOutput, PredictionOutput, SetupScanResult } from "@/lib/
 // ---------------------------------------------------------------------------
 
 export function PredictionCenter() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument] = useState<"GC1!">("GC1!");
   const [engine, setEngine] = useState<"TECHNICAL" | "FUNDAMENTAL">("TECHNICAL");
-  const { data } = useApi<{ technical: PredictionOutput[]; fundamental: PredictionOutput | null }>(`/api/ai/predictions?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 60000);
+  const { data } = useApi<{ technical: PredictionOutput[]; fundamental: PredictionOutput | null }>("/api/ai/predictions?instrument=gc", 60000);
 
   const list: PredictionOutput[] = engine === "TECHNICAL"
     ? (data?.technical ?? [])
@@ -26,8 +26,7 @@ export function PredictionCenter() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-1.5 items-center">
-        <Chip active={instrument === "XAUUSD"} onClick={() => setInstrument("XAUUSD")}>XAUUSD</Chip>
-        <Chip active={instrument === "GC1!"} onClick={() => setInstrument("GC1!")}>GC1!</Chip>
+        <Chip active={true}>GC1! · COMEX</Chip>
         <span className="w-px h-5 bg-white/10 mx-1" />
         <Chip active={engine === "TECHNICAL"} onClick={() => setEngine("TECHNICAL")}>Technical Engine</Chip>
         <Chip active={engine === "FUNDAMENTAL"} onClick={() => setEngine("FUNDAMENTAL")}>Fundamental Engine</Chip>
@@ -83,14 +82,13 @@ export function PredictionCenter() {
 // ---------------------------------------------------------------------------
 
 export function ConfluenceEngine() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
-  const { data } = useApi<ConfluenceOutput>(`/api/ai/confluence?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 60000);
+  const [instrument] = useState<"GC1!">("GC1!");
+  const { data } = useApi<ConfluenceOutput>("/api/ai/confluence?instrument=gc", 60000);
 
   return (
     <div className="space-y-4">
       <div className="flex gap-1.5">
-        <Chip active={instrument === "XAUUSD"} onClick={() => setInstrument("XAUUSD")}>XAUUSD</Chip>
-        <Chip active={instrument === "GC1!"} onClick={() => setInstrument("GC1!")}>GC1!</Chip>
+        <Chip active={true}>GC1! · COMEX</Chip>
       </div>
       {!data ? <SkeletonBlock h={340} /> : (
         <>
@@ -161,9 +159,9 @@ interface SettingsResp {
 }
 
 export function TradeSetupGenerator() {
-  const [instrument, setInstrument] = useState<"XAUUSD" | "GC1!">("GC1!");
+  const [instrument] = useState<"GC1!">("GC1!");
   const [rules, setRules] = useState<Record<string, boolean | number | string> | null>(null);
-  const { data } = useApi<SetupScanResult & { rules: Record<string, unknown> }>(`/api/ai/setups?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, 60000);
+  const { data } = useApi<SetupScanResult & { rules: Record<string, unknown> }>("/api/ai/setups?instrument=gc", 60000);
   const settings = useApi<SettingsResp>("/api/settings", 0);
   const { post, loading } = usePost<SetupScanResult>();
 
@@ -172,19 +170,18 @@ export function TradeSetupGenerator() {
   const toggle = (k: string) => {
     const next = { ...current, [k]: !current[k] };
     setRules(next);
-    void post(`/api/ai/setups?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, next);
+    void post("/api/ai/setups?instrument=gc", next);
   };
   const setRR = (v: number) => {
     const next = { ...current, minRR: v };
     setRules(next);
-    void post(`/api/ai/setups?instrument=${instrument === "GC1!" ? "gc" : "xauusd"}`, next);
+    void post("/api/ai/setups?instrument=gc", next);
   };
 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-1.5 items-center">
-        <Chip active={instrument === "XAUUSD"} onClick={() => setInstrument("XAUUSD")}>XAUUSD</Chip>
-        <Chip active={instrument === "GC1!"} onClick={() => setInstrument("GC1!")}>GC1!</Chip>
+        <Chip active={true}>GC1! · COMEX</Chip>
       </div>
 
       <GlassPanel className="p-3">
