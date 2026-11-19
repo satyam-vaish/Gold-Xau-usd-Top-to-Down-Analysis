@@ -18,6 +18,7 @@ export function GlassPanel({
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
+      whileHover={hover ? { y: -2, transition: { duration: 0.2 } } : undefined}
       transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
       className={cn(strong ? "glass-strong" : "glass", hover && "glass-hover", className)}
     >
@@ -105,18 +106,25 @@ export function StatCard({
   label: string; value?: ReactNode; sub?: ReactNode; status?: string; right?: ReactNode; children?: ReactNode; className?: string; delay?: number;
 }) {
   return (
-    <GlassPanel hover delay={delay} className={cn("p-4 flex flex-col gap-1.5 min-h-[92px]", className)}>
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-[10px] font-medium tracking-[0.16em] uppercase text-zinc-500">{label}</span>
+    <motion.div
+      initial={{ opacity: 0, y: 16, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      whileHover={{ y: -3, scale: 1.01, transition: { duration: 0.2 } }}
+      transition={{ duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={cn("glass glass-hover p-4 flex flex-col gap-1.5 min-h-[92px] group relative overflow-hidden", className)}
+    >
+      <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.02] rounded-full blur-xl pointer-events-none group-hover:bg-[#FFE600]/[0.05] transition-colors duration-500" />
+      <div className="flex items-center justify-between gap-2 relative z-10">
+        <span className="text-[10px] font-medium tracking-[0.16em] uppercase text-zinc-500 group-hover:text-zinc-400 transition-colors">{label}</span>
         <div className="flex items-center gap-1.5">
           {status ? <StatusBadge status={status} /> : null}
           {right}
         </div>
       </div>
-      {value !== undefined ? <div className="text-lg leading-tight font-semibold text-zinc-50 num">{value}</div> : null}
-      {sub ? <div className="text-[11px] text-zinc-500">{sub}</div> : null}
+      {value !== undefined ? <div className="text-lg leading-tight font-semibold text-zinc-50 num relative z-10">{value}</div> : null}
+      {sub ? <div className="text-[11px] text-zinc-500 relative z-10">{sub}</div> : null}
       {children}
-    </GlassPanel>
+    </motion.div>
   );
 }
 
@@ -245,11 +253,13 @@ export function SkeletonGrid({ count = 4, h = 92, className }: { count?: number;
 
 export function Chip({ active, onClick, children, className, style }: { active?: boolean; onClick?: () => void; children: ReactNode; className?: string; style?: CSSProperties }) {
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.03, y: -0.5 }}
+      whileTap={{ scale: 0.96 }}
       onClick={onClick}
       style={style}
       className={cn(
-        "rounded-lg border px-2.5 py-1 text-[10px] font-medium tracking-wide transition-all",
+        "rounded-lg border px-2.5 py-1 text-[10px] font-medium tracking-wide transition-all cursor-pointer select-none",
         active
           ? "border-zinc-200/60 bg-zinc-100/15 text-zinc-50 shadow-[0_0_12px_rgba(255,255,255,0.12)]"
           : "border-white/10 bg-white/[0.03] text-zinc-400 hover:border-white/20 hover:text-zinc-200",
@@ -257,7 +267,7 @@ export function Chip({ active, onClick, children, className, style }: { active?:
       )}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }
 

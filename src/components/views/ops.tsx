@@ -4,6 +4,7 @@
  * Smart Alerts, Risk Management, Model Performance, Settings.
  */
 import { useEffect, useState } from "react";
+import { ExternalLink, Github } from "lucide-react";
 import { useApi, useLiveQuotes, usePost, useNow } from "@/lib/hooks/useData";
 import {
   Chip, GlassPanel, SectionTitle, StatCard, StatusBadge, SkeletonBlock,
@@ -372,6 +373,47 @@ export function SettingsView() {
           ))}
         </div>
         <p className="text-[10px] text-zinc-600 mt-3">{health.data?.disclaimer}</p>
+      </GlassPanel>
+
+      <GlassPanel className="p-4 xl:col-span-2 developer-card-shine" delay={0.1}>
+        <SectionTitle title="Developer Profile & System Architecture" subtitle="Author & Quantitative Intelligence Lead" />
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-white/[0.08] border border-white/15 flex items-center justify-center font-bold text-white shadow-lg shrink-0">
+              SV
+            </div>
+            <div>
+              <div className="text-[13px] font-semibold text-zinc-100 flex items-center gap-2">
+                <span>Satyam Vaish</span>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-mono">Lead Developer</span>
+              </div>
+              <p className="text-[11px] text-zinc-400 mt-0.5">
+                AI & Machine Learning Engineer · Quantitative Trading Systems Architecture
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <a
+              href="https://github.com/satyam-vaish"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 hover:border-white/25 text-[11px] text-zinc-200 hover:text-white transition-all flex items-center gap-1.5 font-mono"
+            >
+              <Github size={13} />
+              <span>github.com/satyam-vaish</span>
+              <ExternalLink size={10} />
+            </a>
+            <a
+              href="https://github.com/satyam-vaish/Gold-Xau-usd-Top-to-Down-Analysis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/35 text-[11px] text-white font-medium transition-all flex items-center gap-1.5"
+            >
+              <span>Repository Source</span>
+              <ExternalLink size={11} />
+            </a>
+          </div>
+        </div>
       </GlassPanel>
     </div>
   );

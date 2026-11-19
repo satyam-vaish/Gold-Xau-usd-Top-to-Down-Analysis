@@ -4,7 +4,7 @@
  * Overview Dashboard — global market intelligence summary.
  */
 import { motion } from "framer-motion";
-import { Activity, ChevronRight, Layers, Newspaper, Scale, Waves } from "lucide-react";
+import { Activity, ChevronRight, ExternalLink, GitBranch, Github, Layers, Newspaper, Scale, Waves } from "lucide-react";
 import { useApi, useLiveQuotes } from "@/lib/hooks/useData";
 import {
   GlassPanel, SectionTitle, StatCard, StatusBadge, DeltaCell, PriceCell,
@@ -98,6 +98,58 @@ export function OverviewDashboard({ onNavigate }: { onNavigate: (id: string) => 
           delay={0.15}
         />
       </div>
+
+      {/* Satyam Vaish GitHub & Architectural Briefing */}
+      <motion.div
+        initial={{ opacity: 0, y: 12, scale: 0.99 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.16 }}
+        className="glass p-3.5 rounded-xl border border-white/10 hover:border-white/20 transition-all shadow-xl relative overflow-hidden group developer-card-shine"
+      >
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-white/[0.08] border border-white/15 flex items-center justify-center text-white shadow-md group-hover:scale-105 group-hover:text-[#FFE600] transition-all shrink-0">
+              <Github size={18} />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[12px] font-semibold text-zinc-100">Gold-Xau-usd-Top-to-Down-Analysis</span>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-mono">LIVE SYSTEM</span>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 font-mono hidden sm:inline">Next.js 16 · Bun · SMC/ICT Engine</span>
+              </div>
+              <p className="text-[10.5px] text-zinc-400 mt-0.5 truncate">
+                Architected & Engineered by <span className="text-zinc-200 font-medium">Satyam Vaish</span> (@satyam-vaish) · Quantitative Trading & Market Structure
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              href="https://github.com/satyam-vaish"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2.5 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 hover:border-white/25 text-[10.5px] text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 font-mono"
+            >
+              <Github size={12} />
+              <span>@satyam-vaish</span>
+              <ExternalLink size={9} className="text-zinc-500" />
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              href="https://github.com/satyam-vaish/Gold-Xau-usd-Top-to-Down-Analysis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/35 text-[10.5px] text-white font-medium transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,255,255,0.08)]"
+            >
+              <GitBranch size={11} className="text-[#FFE600]" />
+              <span>Repository</span>
+              <ExternalLink size={10} />
+            </motion.a>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Featured Live Gold Chart on Overview */}
       <div className="rounded-xl border border-[#151515] p-3 shadow-2xl" style={{ minHeight: 420, backgroundColor: "#050505" }}>

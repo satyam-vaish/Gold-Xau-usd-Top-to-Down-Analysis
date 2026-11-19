@@ -302,6 +302,63 @@
 /* ---------- Chart container ---------- */
 .tv-chart { position: relative; z-index: 1; }
 
+/* ---------- Animated Institutional Accents & Glows ---------- */
+.header-glow-border {
+  position: relative;
+}
+.header-glow-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 15%, rgba(255, 230, 0, 0.35) 50%, rgba(255, 255, 255, 0.1) 85%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmerBorder 8s ease-in-out infinite alternate;
+}
+@keyframes shimmerBorder {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.7; transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 230, 0, 0.4)); }
+  50% { opacity: 1; transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.7)); }
+}
+.gold-glow-pulse {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+.animate-float {
+  animation: softFloat 4s ease-in-out infinite;
+}
+
+.developer-card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.developer-card-shine::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 230, 0, 0.08) 0%, transparent 60%);
+  transform: rotate(30deg);
+  animation: radarSweep 12s linear infinite;
+  pointer-events: none;
+}
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* ---------- Form Controls & Dropdowns ---------- */
 select {
   background-color: #0c0c0e !important;

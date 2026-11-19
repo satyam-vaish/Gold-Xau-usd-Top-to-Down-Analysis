@@ -10,9 +10,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity, AlignLeft, BarChart3, Bell, BookOpen, Bot, Boxes, BrainCircuit,
   CandlestickChart, ChevronLeft, ChevronRight, CircleDot, Coins, Command,
-  Droplets, Flame, Gauge, Globe, Grid3X3, LineChart, ListFilter, Layers,
-  Menu, RefreshCw, Search, Settings, Shield, Sliders, Sparkles, Target,
-  Waves, X, Zap,
+  Droplets, ExternalLink, Flame, Gauge, GitBranch, Github, Globe, Grid3X3,
+  LineChart, ListFilter, Layers, Menu, RefreshCw, Search, Settings, Shield,
+  Sliders, Sparkles, Star, Target, Waves, X, Zap,
 } from "lucide-react";
 import { useApi, useLiveQuotes, useCountUp, useNow } from "@/lib/hooks/useData";
 import { BackgroundScene } from "@/components/layout/BackgroundScene";
@@ -289,7 +289,7 @@ export default function Home() {
       <BackgroundScene />
 
       {/* Top market bar */}
-      <header className="sticky top-0 z-40 glass-strong border-b border-white/10 rounded-none">
+      <header className="sticky top-0 z-40 glass-strong border-b border-white/10 rounded-none header-glow-border">
         <div className="flex items-center">
           <button
             className="lg:hidden p-3 text-zinc-300"
@@ -308,6 +308,25 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-1 min-w-0"><Ticker /></div>
+
+          {/* Satyam Vaish GitHub Repo Pill */}
+          <motion.a
+            href="https://github.com/satyam-vaish/Gold-Xau-usd-Top-to-Down-Analysis"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.04, y: -1 }}
+            whileTap={{ scale: 0.96 }}
+            className="hidden md:flex items-center gap-2 px-3 h-8 rounded-lg bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 hover:border-white/25 text-zinc-200 hover:text-white transition-all shadow-[0_0_12px_rgba(255,255,255,0.05)] mr-2 shrink-0 group cursor-pointer"
+            title="Satyam Vaish (@satyam-vaish) · GitHub Repository"
+          >
+            <Github size={13} className="text-zinc-300 group-hover:text-[#FFE600] transition-colors" />
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] font-medium font-mono text-zinc-300 group-hover:text-white">satyam-vaish</span>
+              <span className="text-[9px] px-1.5 py-0.2 rounded bg-white/10 text-zinc-400 font-mono">repo</span>
+            </div>
+            <ExternalLink size={10} className="text-zinc-500 group-hover:text-zinc-300 transition-colors" />
+          </motion.a>
+
           <button
             onClick={() => setAiOpen((v) => !v)}
             className="hidden xl:flex items-center gap-1.5 px-3 h-12 border-l border-white/10 text-[10px] uppercase tracking-[0.14em] text-zinc-400 hover:text-zinc-100 transition-colors"
@@ -343,7 +362,9 @@ export default function Home() {
                 <ul className="space-y-0.5">
                   {group.items.map((item) => (
                     <li key={item.id}>
-                      <button
+                      <motion.button
+                        whileHover={{ x: 3 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => navigate(item.id)}
                         title={item.label}
                         className={`w-full flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-left transition-all group ${
@@ -354,13 +375,74 @@ export default function Home() {
                       >
                         <item.icon size={14} className={view === item.id ? "text-zinc-100" : "text-zinc-600 group-hover:text-zinc-300"} />
                         {!collapsed && <span className="text-[11px] font-medium truncate">{item.label}</span>}
-                      </button>
+                      </motion.button>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
           </nav>
+
+          {/* Satyam Vaish Developer Card */}
+          {!collapsed && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="p-2.5 mx-2 mb-2 rounded-xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/10 shadow-lg relative overflow-hidden group developer-card-shine"
+            >
+              <div className="flex items-center gap-2.5 relative z-10">
+                <div className="relative shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-zinc-800 border border-white/20 flex items-center justify-center font-bold text-[11px] text-zinc-100 shadow-inner">
+                    SV
+                  </div>
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-black animate-pulse" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[11px] font-semibold text-zinc-100 truncate flex items-center gap-1">
+                    Satyam Vaish
+                  </div>
+                  <a
+                    href="https://github.com/satyam-vaish"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-zinc-400 hover:text-zinc-200 transition-colors flex items-center gap-1 truncate font-mono"
+                  >
+                    <Github size={10} />
+                    <span>@satyam-vaish</span>
+                    <ExternalLink size={8} className="opacity-60" />
+                  </a>
+                </div>
+              </div>
+              <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[9px] text-zinc-500 relative z-10">
+                <span className="truncate">Quantitative & AI Dev</span>
+                <a
+                  href="https://github.com/satyam-vaish/Gold-Xau-usd-Top-to-Down-Analysis"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-400 hover:text-white font-medium underline-offset-2 hover:underline shrink-0 flex items-center gap-0.5"
+                >
+                  <span>Repo</span>
+                  <ExternalLink size={8} />
+                </a>
+              </div>
+            </motion.div>
+          )}
+
+          {collapsed && (
+            <div className="p-2 flex justify-center border-t border-white/8">
+              <a
+                href="https://github.com/satyam-vaish"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Satyam Vaish (@satyam-vaish) on GitHub"
+                className="w-8 h-8 rounded-lg glass flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
+              >
+                <Github size={14} />
+              </a>
+            </div>
+          )}
+
           <button
             onClick={() => setCollapsed((v) => !v)}
             className="border-t border-white/8 p-3 flex items-center justify-center text-zinc-600 hover:text-zinc-200 transition-colors"
@@ -455,10 +537,31 @@ export default function Home() {
       {/* Bottom market info bar */}
       <footer className="sticky bottom-0 z-30 glass-strong rounded-none border-t border-white/10 mt-auto">
         <div className="flex items-center gap-4 px-4 h-9 text-[9px] text-zinc-600 overflow-hidden">
-          <span className="uppercase tracking-[0.2em] text-zinc-500 shrink-0">GOLD INTELLIGENCE AI</span>
-          <span className="hidden md:inline truncate">AI outputs are analytical estimates, not financial advice</span>
-          <span className="hidden lg:inline num">GC1! (COMEX Futures): {quotes["GC1!"]?.price ?? "…"}</span>
-          <span className="ml-auto num shrink-0" suppressHydrationWarning>{now ? now.toISOString().slice(11, 19) : "--:--:--"} UTC</span>
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="uppercase tracking-[0.2em] text-zinc-500 font-semibold">GOLD INTELLIGENCE AI</span>
+            <span className="text-zinc-700">·</span>
+            <a
+              href="https://github.com/satyam-vaish"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-zinc-200 transition-colors flex items-center gap-1 font-mono"
+            >
+              <Github size={11} className="text-zinc-400" />
+              <span>Satyam Vaish (@satyam-vaish)</span>
+            </a>
+            <span className="text-zinc-700">·</span>
+            <a
+              href="https://github.com/satyam-vaish/Gold-Xau-usd-Top-to-Down-Analysis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-500 hover:text-zinc-300 transition-colors hidden sm:inline"
+            >
+              Source Code ↗
+            </a>
+          </div>
+          <span className="hidden md:inline truncate text-zinc-500">AI analytical estimates · strictly institutional</span>
+          <span className="hidden lg:inline num text-zinc-400">GC1! (COMEX Futures): {quotes["GC1!"]?.price ?? "…"}</span>
+          <span className="ml-auto num shrink-0 text-zinc-500" suppressHydrationWarning>{now ? now.toISOString().slice(11, 19) : "--:--:--"} UTC</span>
         </div>
       </footer>
 
